@@ -4,8 +4,8 @@ on:
   push:
     branches:
       - master
-        paths: 
-          - main/src/java/org/firstinspires/ftc/teamcode/lib
+    paths: 
+        - main/src/java/org/firstinspires/ftc/teamcode/lib
       
       
 
