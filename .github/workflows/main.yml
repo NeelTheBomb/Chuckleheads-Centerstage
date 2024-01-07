@@ -4,7 +4,10 @@ on:
   push:
     branches:
       - master
-      - main
+        paths: 
+          - main/src/java/org/firstinspires/ftc/teamcode/lib
+      
+      
 
 jobs:
   publish:
