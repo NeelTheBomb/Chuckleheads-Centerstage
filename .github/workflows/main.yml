@@ -3,9 +3,7 @@ name: Deploy Javadoc
 on:
   push:
     branches:
-      - master
-    paths: 
-        - main/src/java/org/firstinspires/ftc/teamcode/lib
+      - 'master/main/src/java/org/firstinspires/ftc/teamcode/lib/'
       
       
 
