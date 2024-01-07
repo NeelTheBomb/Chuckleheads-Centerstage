@@ -14,6 +14,7 @@ jobs:
         uses: MathieuSoysal/Javadoc-publisher.yml@v2.4.0
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          folder: main/src/java/org/firstinspires/ftc/teamcode/lib
           javadoc-branch: javadoc
           java-version: 17
           target-folder: javadoc 
