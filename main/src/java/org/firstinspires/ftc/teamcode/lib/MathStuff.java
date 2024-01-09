@@ -8,7 +8,7 @@ import java.util.*;
  * @author N/A
  */
 public class MathStuff {
-    /**
+    /**0
      * FILL ME OUT
      * @param old_min Old range minimum
      * @param old_max Old range maximum
@@ -24,10 +24,10 @@ public class MathStuff {
 
     /**
      * FILL ME OUT
-     * @param min FILL ME OUT
-     * @param max FILL ME OUT
-     * @param value FILL ME OUT
-     * @return FILL ME OUT
+     * @param min minimum value in range
+     * @param max maximum value in range
+     * @param value value that needs to be clamped
+     * @return if value is outside of range, clamps it to min or max of range
      */
     public static double clamp(double min, double max, double value) {
         if (value > max) { return max; }
@@ -58,9 +58,9 @@ public class MathStuff {
 
     /**
      * FILL ME OUT
-     * @param a FILL ME OUT
-     * @param n FILL ME OUT
-     * @return FILL ME OUT
+     * @param a array of integers
+     * @param n length of array
+     * @return the median value of array a
      */
     public static double findMedian(int a[], int n)
     {
@@ -76,10 +76,10 @@ public class MathStuff {
 
 
     /**
-     * FILL ME OUT
-     * @param nums FILL ME OUT
-     * @param value FILL ME OUT
-     * @return FILL ME OUT
+     * This returns an integer in num[] that is closest to value
+     * @param nums array of integers that gets compared to value
+     * @param value value to compare to
+     * @return returns which interger in nums is closest to value
      */
     public static int smallestDiff(int nums[], int value) {
         int smallestDifference = 250;
@@ -96,10 +96,11 @@ public class MathStuff {
 
 
     /**
-     * FILL ME OUT
-     * @param currentAngle FILL ME OUT
-     * @param targetAngle FILL ME OUT
-     * @return FILL ME OUT
+     * This returns a value from -1 to 1 representing how much to robot needs to turn to reach its target angle.
+     * @param currentAngle the current angle of the robot in degrees.
+     * @param targetAngle than angle you want ot robot to face in degrees
+     * @return Returns value from -1 to 1 representing how much the robot should turn to reach the current angle. 
+     * This value can be plugged as the turn constant in the driving code 
      */
     public static double shortestAngleRemapped(double currentAngle, double targetAngle) {
         // convert from radians to degrees
