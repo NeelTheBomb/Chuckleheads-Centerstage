@@ -8,10 +8,10 @@ import java.util.Vector;
  * @author Neil N
  */
 public class MathVector {
-    private final double magnitude;
-    private final double angle;
-    private final double x;
-    private final double y;
+    public final double magnitude;
+    public final double angle;
+    public final double x;
+    public final double y;
 
     /**
      * creates vector
@@ -35,7 +35,7 @@ public class MathVector {
     /**
      * adds an array of vectors together
      * @param Vectors vector array to be added
-     * @return FILL ME OUT
+     * @return returns a new MathVector
      */
     public MathVector add(MathVector[] vectors) {
         double totaly = 0;
@@ -55,38 +55,5 @@ public class MathVector {
         // }
         double vectormagnitude = Math.sqrt((totalx*totalx)+(totaly*totaly));
         return new MathVector(vectormagnitude, vectorangle);
-    }
-
-
-    /**
-     * FILL ME OUT
-     * @return FILL ME OUT
-     */
-    public double getX() {
-        return this.x;
-    }
-
-    /**
-     * FILL ME OUT
-     * @return FILL ME OUT
-     */
-    public double getY() {
-        return this.y;
-    }
-
-    /**
-     * FILL ME OUT
-     * @return FILL ME OUT
-     */
-    public double getMagnitude() {
-        return this.magnitude;
-    }
-
-    /**
-     * FILL ME OUT
-     * @return FILL ME OUT
-     */
-    public double getAngle() {
-        return this.angle;
     }
 }
