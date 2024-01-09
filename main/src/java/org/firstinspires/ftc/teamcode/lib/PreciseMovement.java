@@ -31,7 +31,7 @@ public class PreciseMovement {
     /******* PUBLIC FUNCTIONS ********/
     /**
      * FILL ME OUT
-     * @param imu FILL ME OUT
+     * @param imu internal measurement unit
      * @param fr FILL ME OUT
      * @param fl FILL ME OUT
      * @param br FILL ME OUT
@@ -110,7 +110,7 @@ public class PreciseMovement {
         double blTick = bl.getCurrentPosition() - blPastTick;
         double brTick = br.getCurrentPosition() - brPastTick;
 
-        Vector currentVector = finalWheelVector(flTick, frTick, blTick, brTick, -imu.getAngularOrientation().firstAngle);
+        MathVector currentVector = finalWheelVector(flTick, frTick, blTick, brTick, -imu.getAngularOrientation().firstAngle);
         double[] pos = newPosition(xPos, yPos, currentVector);
         xPos = pos[0];
         yPos = pos[1];
@@ -131,7 +131,7 @@ public class PreciseMovement {
         double ophTick = oph.getCurrentPosition() - ophPastTick;
         double opvTick = opv.getCurrentPosition() - opvPastTick;
         
-        Vector currentVector = finalDeadWheelVector(ophTick, opvTick, -imu.getAngularOrientation().firstAngle);
+        MathVector currentVector = finalDeadWheelVector(ophTick, opvTick, -imu.getAngularOrientation().firstAngle);
         double[] pos = newPosition(xPos, yPos, currentVector);
         xPos = pos[0];
         yPos = pos[1];
@@ -150,14 +150,14 @@ public class PreciseMovement {
      * @param robotAngle FILL ME OUT
      * @return FILL ME OUT
      */
-    private static Vector finalDeadWheelVector(double deltaOph, double deltaOpv, double robotAngle) {
-        Vector ophVector = new Vector(deltaOph, Math.PI + robotAngle);
-        Vector opvVector = new Vector(deltaOpv, Math.PI/2 + robotAngle);
+    private static MathVector finalDeadWheelVector(double deltaOph, double deltaOpv, double robotAngle) {
+        MathVector ophVector = new MathVector(deltaOph, Math.PI + robotAngle);
+        MathVector opvVector = new MathVector(deltaOpv, Math.PI/2 + robotAngle);
 
-        Vector[] deadWheelVectors = new Vector[] {ophVector, opvVector};
+        MathVector[] deadWheelVectors = new MathVector[] {ophVector, opvVector};
         // just using a random vector to use the add function in the vector class
-        Vector finalVector = ophVector.add(deadWheelVectors);
-        return new Vector(finalVector.getMagnitude(), finalVector.getAngle() + robotAngle);
+        MathVector finalVector = ophVector.add(deadWheelVectors);
+        return new MathVector(finalVector.getMagnitude(), finalVector.getAngle() + robotAngle);
     }
 
 
@@ -289,16 +289,16 @@ public class PreciseMovement {
      * @param robotAngle FILL ME OUT
      * @return FILL ME OUT
      */
-    private static Vector finalWheelVector(double deltaFl, double deltaFr, double deltaBl, double deltaBr, double robotAngle) {
-        Vector flvector = new Vector(deltaFl, Math.PI*0.25 + robotAngle);
-        Vector frvector = new Vector(deltaFr, Math.PI*0.75 + robotAngle);
-        Vector blvector = new Vector(deltaBl, Math.PI*0.75 + robotAngle);
-        Vector brvector = new Vector(deltaBr, Math.PI*0.25 + robotAngle);
+    private static MathVector finalWheelVector(double deltaFl, double deltaFr, double deltaBl, double deltaBr, double robotAngle) {
+        MathVector flvector = new MathVector(deltaFl, Math.PI*0.25 + robotAngle);
+        MathVector frvector = new MathVector(deltaFr, Math.PI*0.75 + robotAngle);
+        MathVector blvector = new MathVector(deltaBl, Math.PI*0.75 + robotAngle);
+        MathVector brvector = new MathVector(deltaBr, Math.PI*0.25 + robotAngle);
 
-        Vector[] wheelVectors = new Vector[] { flvector, frvector, blvector, brvector };
+        MathVector[] wheelVectors = new MathVector[] { flvector, frvector, blvector, brvector };
         // just using a random vector to use the add function in the vector class
-        Vector finalVector = blvector.add(wheelVectors);
-        return new Vector(finalVector.getMagnitude(), finalVector.getAngle() + robotAngle);
+        MathVector finalVector = blvector.add(wheelVectors);
+        return new MathVector(finalVector.getMagnitude(), finalVector.getAngle() + robotAngle);
     }
 
 
@@ -309,7 +309,7 @@ public class PreciseMovement {
      * @param finalVector FILL ME OUT
      * @return FILL ME OUT
      */
-    private static double[] newPosition(double oldX, double oldY, Vector finalVector) {
+    private static double[] newPosition(double oldX, double oldY, MathVector finalVector) {
         return new double[] { oldX + finalVector.getX(), oldY + finalVector.getY() };
     }
 
