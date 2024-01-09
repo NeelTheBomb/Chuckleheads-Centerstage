@@ -74,11 +74,7 @@ public class Teleop extends LinearOpMode {
         
         // Retrieve the IMU from the hardware map
         imu = hardwareMap.get(BNO055IMU.class, "gyro");
-        BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
-        // Technically this is the default, however specifying it is clearer
-        parameters.angleUnit = BNO055IMU.AngleUnit.RADIANS;
-        // Without this, data retrieving from the IMU throws an exception
-        imu.initialize(parameters);
+        imuInit();
         
         // wait until init is pressed
         waitForStart();
@@ -95,6 +91,7 @@ public class Teleop extends LinearOpMode {
             armMove();
             gripsForward();
             sucks(); // fix: rename
+            ImuReinit();
             
             telemetry.update();
         }
@@ -342,5 +339,21 @@ public class Teleop extends LinearOpMode {
             arm.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
             arm.setPower(0);
         }
+    }
+    
+    
+    private void ImuReinit() {
+        if (gamepad1.a) {
+            imuInit();
+        }
+    }
+    
+    
+    private void imuInit() {
+        BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
+        // Technically this is the default, however specifying it is clearer
+        parameters.angleUnit = BNO055IMU.AngleUnit.RADIANS;
+        // Without this, data retrieving from the IMU throws an exception
+        imu.initialize(parameters);
     }
 }
