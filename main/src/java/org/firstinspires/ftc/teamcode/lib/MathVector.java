@@ -1,22 +1,24 @@
 package org.firstinspires.ftc.teamcode.lib;
 
+import java.util.Vector;
+
 
 /**
- * FILL ME OUT
+ * Represents a vector
  * @author Neil N
  */
-public class Vector {
+public class MathVector {
     private final double magnitude;
     private final double angle;
     private final double x;
     private final double y;
 
     /**
-     * FILL ME OUT
-     * @param m FILL ME OUT
-     * @param a FILL ME OUT
+     * creates vector
+     * @param m magnitude
+     * @param a angle
      */
-    public Vector(double m, double a) {
+    public MathVector(double m, double a) {
         if (m < 0) {
             this.magnitude = -m;
             this.angle = a + Math.PI;
@@ -31,11 +33,11 @@ public class Vector {
     }
 
     /**
-     * FILL ME OUT
-     * @param vectors FILL ME OUT
+     * adds an array of vectors together
+     * @param Vectors vector array to be added
      * @return FILL ME OUT
      */
-    public Vector add(Vector[] vectors) {
+    public MathVector add(MathVector[] vectors) {
         double totaly = 0;
         double totalx = 0;
         for (int i = 0; i < vectors.length; i++) {
@@ -52,12 +54,12 @@ public class Vector {
         //     angle = (Math.PI) * 2 - Math.abs(angle);
         // }
         double vectormagnitude = Math.sqrt((totalx*totalx)+(totaly*totaly));
-        return new Vector(vectormagnitude, vectorangle);
+        return new MathVector(vectormagnitude, vectorangle);
     }
 
 
     /**
-     *  FILL ME OUT
+     * FILL ME OUT
      * @return FILL ME OUT
      */
     public double getX() {
