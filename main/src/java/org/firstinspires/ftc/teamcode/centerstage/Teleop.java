@@ -35,7 +35,7 @@ public class Teleop extends LinearOpMode {
     
     private final double rxMultiplier = 0.9;
     
-    private final boolean gunnerActive = false;
+    private boolean gunnerActive = false;
 
     @Override
     public void runOpMode() {
@@ -50,8 +50,8 @@ public class Teleop extends LinearOpMode {
         arm = hardwareMap.get(DcMotorEx.class, "arm");           //
         iwl = hardwareMap.get(Servo.class, "intakeWristLeft");   // intake wrist left
         iwr = hardwareMap.get(Servo.class, "intakeWristRight");  // intake wrist right
-        lg = hardwareMap.get(Servo.class, "lGrip");           // left gripper
-        rg = hardwareMap.get(Servo.class, "rGrip");           // right gripper
+        lg = hardwareMap.get(Servo.class, "lGrip");              // left gripper
+        rg = hardwareMap.get(Servo.class, "rGrip");              // right gripper
         
         // reset encoders
         fl.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -84,6 +84,7 @@ public class Teleop extends LinearOpMode {
         waitForStart();
         
         while (opModeIsActive()) {
+            setIsGunnerActive();
             move();
             intake();
             intakeArm();
@@ -100,13 +101,28 @@ public class Teleop extends LinearOpMode {
     }
     
     
+    private void setIsGunnerActive() {
+        // if any button on the gunner's controller is pressed, set gunnerActive
+        // to true. Otherwise, false.
+        gunnerActive = !gamepad2.atRest() || gamepad2.dpad_up || gamepad2.dpad_down 
+                || gamepad2.dpad_left || gamepad2.dpad_right || gamepad2.a
+                || gamepad2.a || gamepad2.b || gamepad2.x || gamepad2.y
+                || gamepad2.guide || gamepad2.start || gamepad2.back 
+                || gamepad2.left_bumper || gamepad2.right_bumper;
+    }
+    
+    
     private void move() {
         fl.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         fr.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         bl.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         br.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         
-        double maxSpeed = 0.7;
+        double maxSpeed = 0.7; // fix: rename. Named maxSpeed, but controls power?
+        if (gunnerActive) {
+            maxSpeed /= 2;
+        }
+        
         double botHeading = -(imu.getAngularOrientation().firstAngle);
         
         double rx = ((gamepad1.right_stick_y) * Math.sin(botHeading) + (gamepad1.right_stick_x) *Math.cos(botHeading));
@@ -223,13 +239,13 @@ public class Teleop extends LinearOpMode {
     }
     
     
-    private void intakeStart(){
+    private void intakeStart() {
         iwl.setPosition(0.0);
         iwr.setPosition(0.0);
     }
     
     
-    private void intakeLaunch(){
+    private void intakeLaunch() {
         if (gamepad2.right_stick_button && gamepad2.left_stick_button){
             iwl.setPosition(20.0);
             iwr.setPosition(-20.0);
@@ -326,6 +342,5 @@ public class Teleop extends LinearOpMode {
             arm.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
             arm.setPower(0);
         }
-        
     }
 }
