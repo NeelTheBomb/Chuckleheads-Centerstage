@@ -8,8 +8,8 @@ import java.util.*;
  * @author N/A
  */
 public class MathStuff {
-    /**0
-     * FILL ME OUT
+    /**
+     * Squishes or expands the range a value is in from the old to new range, changing the value. If a value is 1 in the range [0, 2], it would be 2 in the range [0, 4] for example.
      * @param old_min Old range minimum
      * @param old_max Old range maximum
      * @param new_min New range minimum
@@ -23,7 +23,7 @@ public class MathStuff {
 
 
     /**
-     * FILL ME OUT
+     * clamps a value in a range. If value is less than range, gets clamped to min and gets clamped to max vice versa.
      * @param min minimum value in range
      * @param max maximum value in range
      * @param value value that needs to be clamped
@@ -57,7 +57,7 @@ public class MathStuff {
 
 
     /**
-     * FILL ME OUT
+     * returns median value in an array
      * @param a array of integers
      * @param n length of array
      * @return the median value of array a
