@@ -4,7 +4,58 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c82a9c55-9380-4be5-91a3-b73a0f22e285" name="Changes" comment="" />
+    <list default="true" id="c82a9c55-9380-4be5-91a3-b73a0f22e285" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/docs/index-all.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/org/firstinspires/ftc/teamcode/lib/RobotHardware.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/allclasses-index.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/allclasses-index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/allpackages-index.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/allpackages-index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/element-list" beforeDir="false" afterPath="$PROJECT_DIR$/docs/element-list" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/help-doc.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/help-doc.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-1.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-10.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-11.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-12.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-13.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-14.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-15.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-16.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-17.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-2.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-3.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-4.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-5.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-6.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-7.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-8.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-9.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/legal/ADDITIONAL_LICENSE_INFO" beforeDir="false" afterPath="$PROJECT_DIR$/docs/legal/ADDITIONAL_LICENSE_INFO" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/legal/ASSEMBLY_EXCEPTION" beforeDir="false" afterPath="$PROJECT_DIR$/docs/legal/ASSEMBLY_EXCEPTION" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/legal/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/docs/legal/LICENSE" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/legal/jqueryUI.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/legal/jqueryUI.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/member-search-index.js" beforeDir="false" afterPath="$PROJECT_DIR$/docs/member-search-index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/org/firstinspires/ftc/teamcode/centerstage/Teleop.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/org/firstinspires/ftc/teamcode/lib/MathVector.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/org/firstinspires/ftc/teamcode/centerstage/package-summary.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/org/firstinspires/ftc/teamcode/centerstage/package-tree.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/org/firstinspires/ftc/teamcode/lib/Alliance.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/org/firstinspires/ftc/teamcode/lib/Alliance.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/org/firstinspires/ftc/teamcode/lib/AutonomousState.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/org/firstinspires/ftc/teamcode/lib/AutonomousState.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/org/firstinspires/ftc/teamcode/lib/MathStuff.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/org/firstinspires/ftc/teamcode/lib/MathStuff.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/org/firstinspires/ftc/teamcode/lib/PreciseMovement.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/org/firstinspires/ftc/teamcode/lib/PreciseMovement.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/org/firstinspires/ftc/teamcode/lib/Side.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/org/firstinspires/ftc/teamcode/lib/Side.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/org/firstinspires/ftc/teamcode/lib/Vector.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/org/firstinspires/ftc/teamcode/lib/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/org/firstinspires/ftc/teamcode/lib/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/org/firstinspires/ftc/teamcode/lib/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/org/firstinspires/ftc/teamcode/lib/package-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/overview-summary.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/overview-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/overview-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/package-search-index.js" beforeDir="false" afterPath="$PROJECT_DIR$/docs/package-search-index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/script-dir/jquery-ui.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/docs/script-dir/jquery-ui.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/script-dir/jquery-ui.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/docs/script-dir/jquery-ui.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/type-search-index.js" beforeDir="false" afterPath="$PROJECT_DIR$/docs/type-search-index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/src/java/org/firstinspires/ftc/teamcode/lib/PreciseMovement.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/src/java/org/firstinspires/ftc/teamcode/lib/PreciseMovement.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -22,6 +73,9 @@
   <component name="MacroExpansionManager">
     <option name="directoryName" value="pex1x2ut" />
   </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 6
@@ -37,6 +91,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "ASKED_ADD_EXTERNAL_FILES": "true",
+    "JavaScript Debug.index.html.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "master",
@@ -59,6 +114,16 @@
       <recent name="C:\Users\natew\IdeaProjects\Chuckleheads-Centerstage\src" />
     </key>
   </component>
+  <component name="RunManager">
+    <configuration name="index.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/Chuckleheads-Centerstage/docs/index.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JavaScript Debug.index.html" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -68,6 +133,7 @@
       <option name="presentableId" value="Default" />
       <updated>1704602350803</updated>
       <workItem from="1704602351881" duration="406000" />
+      <workItem from="1704855016163" duration="691000" />
     </task>
     <servers />
   </component>
