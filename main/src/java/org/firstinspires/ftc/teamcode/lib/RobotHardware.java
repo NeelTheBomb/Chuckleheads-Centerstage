@@ -10,6 +10,7 @@ import com.qualcomm.hardware.bosch.BNO055IMU;
 /**
  * Initializes hardware variables. Makes it so that one function call is 
  * required in our teleop and autonomous files to get hardware variables.
+ * @author Nathan W
  */
 public class RobotHardware {
     public static DcMotorEx fl, bl, fr, br, ia, is, slide, arm = null;
