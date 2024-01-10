@@ -23,14 +23,12 @@ import static org.firstinspires.ftc.teamcode.lib.MathStuff.remapRange;
 import static org.firstinspires.ftc.teamcode.lib.MathStuff.shortestAngleRemapped;
 import static org.firstinspires.ftc.teamcode.lib.MathStuff.sqr;
 
+// our static variables
+import static org.firstinspires.ftc.teamcode.lib.RobotHardware.*;
+
 
 @TeleOp(name="Teleop", group="Linear Opmode")
 public class Teleop extends LinearOpMode {
-    // initialize hardware variables
-    private DcMotorEx fl, bl, fr, br, ia, is, slide, arm = null;
-    private Servo iwl, iwr, lg, rg = null;
-    private BNO055IMU imu = null;
-    
     private double moveGripperServo = 0.0; // fix: rename
     
     private final double rxMultiplier = 0.9;
@@ -39,42 +37,7 @@ public class Teleop extends LinearOpMode {
 
     @Override
     public void runOpMode() {
-        // Declare our motors
-        fl = hardwareMap.get(DcMotorEx.class, "frontLeft");      // front left
-        bl = hardwareMap.get(DcMotorEx.class, "backLeft");       // back left
-        fr = hardwareMap.get(DcMotorEx.class, "frontRight");     // front right
-        br = hardwareMap.get(DcMotorEx.class, "backRight");      // back right
-        slide = hardwareMap.get(DcMotorEx.class, "slide");       // slide
-        ia = hardwareMap.get(DcMotorEx.class, "intakeArm");      // intake arm
-        is = hardwareMap.get(DcMotorEx.class, "intakeSpinner");  // instaks spinner
-        arm = hardwareMap.get(DcMotorEx.class, "arm");           //
-        iwl = hardwareMap.get(Servo.class, "intakeWristLeft");   // intake wrist left
-        iwr = hardwareMap.get(Servo.class, "intakeWristRight");  // intake wrist right
-        lg = hardwareMap.get(Servo.class, "lGrip");              // left gripper
-        rg = hardwareMap.get(Servo.class, "rGrip");              // right gripper
-        
-        // reset encoders
-        fl.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        fr.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        bl.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        br.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        ia.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        slide.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        
-        // reverse stuff
-        fl.setDirection(DcMotor.Direction.REVERSE);
-        bl.setDirection(DcMotor.Direction.REVERSE);
-        iwl.setDirection(Servo.Direction.REVERSE);
-        rg.setDirection(Servo.Direction.REVERSE);
-        
-        // set zero power behavior
-        arm.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        ia.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        slide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        
-        // Retrieve the IMU from the hardware map
-        imu = hardwareMap.get(BNO055IMU.class, "gyro");
-        imuInit();
+        hardwareInit(hardwareMap);
         
         // wait until init is pressed
         waitForStart();
@@ -346,14 +309,5 @@ public class Teleop extends LinearOpMode {
         if (gamepad1.a) {
             imuInit();
         }
-    }
-    
-    
-    private void imuInit() {
-        BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
-        // Technically this is the default, however specifying it is clearer
-        parameters.angleUnit = BNO055IMU.AngleUnit.RADIANS;
-        // Without this, data retrieving from the IMU throws an exception
-        imu.initialize(parameters);
     }
 }
