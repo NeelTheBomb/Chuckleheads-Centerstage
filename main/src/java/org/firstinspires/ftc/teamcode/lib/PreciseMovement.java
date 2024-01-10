@@ -11,8 +11,8 @@ import static org.firstinspires.ftc.teamcode.lib.MathStuff.shortestAngleRemapped
 
 
 /**
- * FILL ME OUT
- * @author Niel N
+ * This being static could make it broken. Further testing is needed. It may have to be turned into an object you initialize.
+ * @author Neel N
  */
 public class PreciseMovement {
     private static DcMotorEx fr, fl, br, bl, opv, oph;
@@ -30,14 +30,14 @@ public class PreciseMovement {
 
     /******* PUBLIC FUNCTIONS ********/
     /**
-     * FILL ME OUT
+     * initializes class asuming no wheels should be reversed
      * @param imu internal measurement unit
-     * @param fr FILL ME OUT
-     * @param fl FILL ME OUT
-     * @param br FILL ME OUT
-     * @param bl FILL ME OUT
-     * @param oph FILL ME OUT
-     * @param opv FILL ME OUT
+     * @param fr front right wheel
+     * @param fl front left wheel
+     * @param br back right wheel
+     * @param bl back left wheel
+     * @param oph horizontal dead wheel
+     * @param opv horizontal vertical wheel
      */
     public static void init(BNO055IMU imu, DcMotorEx fr, DcMotorEx fl, 
             DcMotorEx br, DcMotorEx bl, DcMotorEx oph, DcMotorEx opv) {
@@ -46,18 +46,18 @@ public class PreciseMovement {
     }
 
     /**
-     * FILL ME OUT
-     * @param imu FILL ME OUT
-     * @param fr FILL ME OUT
-     * @param fl FILL ME OUT
-     * @param br FILL ME OUT
-     * @param bl FILL ME OUT
-     * @param oph FILL ME OUT
-     * @param opv FILL ME OUT
-     * @param frRev FILL ME OUT
-     * @param flRev FILL ME OUT
-     * @param brRev FILL ME OUT
-     * @param blRev FILL ME OUT
+     * initializes class letting you control which wheels are reversed
+     * @param imu internal measurement unit
+     * @param fr front right wheel
+     * @param fl front left wheel
+     * @param br back right wheel
+     * @param bl back left wheel
+     * @param oph horizontal dead wheel
+     * @param opv horizontal vertical wheel
+     * @param frRev boolean, describe if front right motor is reversed or not
+     * @param flRev boolean, describe if front left motor is reversed or not
+     * @param brRev boolean, describe if back right motor is reversed or not
+     * @param blRev boolean, describe if back left motor is reversed or not
      */
     public static void init(BNO055IMU imu, DcMotorEx fr, DcMotorEx fl, 
             DcMotorEx br, DcMotorEx bl, DcMotorEx oph, DcMotorEx opv, 
@@ -69,25 +69,25 @@ public class PreciseMovement {
 
     /******* PUBLIC FUNCTIONS ********/
     /**
-     * FILL ME OUT
-     * @param targetPosX FILL ME OUT
-     * @param targetPosY FILL ME OUT
-     * @param iterationTime FILL ME OUT
-     * @return FILL ME OUT
+     * moves to a predefined position
+     * @param targetPosX the target x position you want to robot to move to
+     * @param targetPosY the target y position you want the robot to move to
+     * @param iterationTime the time between each time this function is called. Have to use a timer in main code this is being used in. Used to make PID more accurate.
+     * @return returns a boolean that is true if the current position is less than 10 away from the target position
      */
     public static boolean moveToPos(double targetPosX, double targetPosY, double iterationTime) {
         double[] moveConstants = desiredVector(xPos, yPos, targetPosX, targetPosY, iterationTime);
 
         robotMove(moveConstants[0], moveConstants[1], 0);
 
-        return distanceFromPos(targetPosX, targetPosY) < 10;
+        return distanceFromPos(targetPosX, targetPosY) < movementTolerance;
     }
 
     /**
-     * FILL ME OUT
-     * @param targetAngle FILL ME OUT
-     * @param iterationTime FILL ME OUT
-     * @return FILL ME OUT
+     * This function moves the robot closer to a target angle from its current angle each time it is called.
+     * @param targetAngle the angle the robot should be facing
+     * @param iterationTime the time between each time this function is called. Used for PID
+     * @return returns a boolean that is true of the currentanle is within a set tolerance of the target angle
      */
     public static boolean turnToAngle(double targetAngle, double iterationTime) {
         double[] angleValues = PID(angleKp, angleKd, angleKi, -imu.getAngularOrientation().firstAngle, targetAngle,
@@ -102,7 +102,8 @@ public class PreciseMovement {
     }
 
     /**
-     * FILL ME OUT
+     * Updates the position of the robot. Uses all 4 motor encoders to do this. Finds the delta of encoder value of the motors and turns this into a vector.  
+     * Adds these vectors together to find the change in the robots position. Adds this change to the current position to find the updated current position of the robot.
      */
     public static void updatePos() {
         double flTick = fl.getCurrentPosition() - flPastTick;
@@ -124,8 +125,8 @@ public class PreciseMovement {
 
 
     /**
-     * FILL ME OUT
-     * @return FILL ME OUT
+     * same as update pos but uses deadwheel encoder values instead.
+     * @return returns current position of dead wheels for TESTING purposes. Return can be gotton rid of after.
      */
     public static double[] updateDeadWheelPos() {
         double ophTick = oph.getCurrentPosition() - ophPastTick;
@@ -144,11 +145,11 @@ public class PreciseMovement {
 
 
     /**
-     * FILL ME OUT
-     * @param deltaOph FILL ME OUT
-     * @param deltaOpv FILL ME OUT
-     * @param robotAngle FILL ME OUT
-     * @return FILL ME OUT
+     * converts enoder changes to vectors. Adds imu angle to translate vectors to angle of robot. Adds vectors to find change in robots position.
+     * @param deltaOph Encoder change of horizontal dead wheel
+     * @param deltaOpv Encoder change of vertical dead wheel
+     * @param robotAngle angle of robot gotton from imu in radians
+     * @return returns vector representing change in robots position
      */
     private static MathVector finalDeadWheelVector(double deltaOph, double deltaOpv, double robotAngle) {
         MathVector ophVector = new MathVector(deltaOph, Math.PI + robotAngle);
@@ -157,15 +158,15 @@ public class PreciseMovement {
         MathVector[] deadWheelVectors = new MathVector[] {ophVector, opvVector};
         // just using a random vector to use the add function in the vector class
         MathVector finalVector = ophVector.add(deadWheelVectors);
-        return new MathVector(finalVector.getMagnitude(), finalVector.getAngle() + robotAngle);
+        return new MathVector(finalVector.magnitude, finalVector.angle + robotAngle);
     }
 
 
     /**
-     * FILL ME OUT
-     * @param targetPosX FILL ME OUT
-     * @param targetPosY FILL ME OUT
-     * @return FILL ME OUT
+     * returns the distance the current pos is from the target pos
+     * @param targetPosX the x target position
+     * @param targetPosY the y target position
+     * @return returns the distance the currentposition is from the target position
      */
     public static double distanceFromPos(double targetPosX, double targetPosY) {
         return Math.sqrt(sqr(targetPosX-xPos) + sqr(targetPosY-yPos));
@@ -174,30 +175,30 @@ public class PreciseMovement {
 
     /******* GETTERS ********/
     /**
-     * FILL ME OUT
-     * @return FILL ME OUT
+     * getter for position
+     * @return returns the current x and y position as array
      */
     public static double[] getPos() { return new double[] { xPos, yPos }; }
 
 
     /******* SETTERS ********/
     /**
-     * FILL ME OUT
-     * @param t FILL ME OUT
+     * sets tolerance movement that gets used in the robot movement function to determine wheter to return true of not 
+     * @param t tolerance you want for distance from currentPosition to targetPosition. (How precise the movement has to be to a position)
      */
     public static void setMovementTolerance(double t) { movementTolerance = t; }
 
     /**
-     * FILL ME OUT
-     * @param t FILL ME OUT
+     * controls the tolerance of whether the turnToAngle returns true. True means it should stop
+     * @param t tolerance of how close robot should get to angle in turnToAngle function
      */
     public static void setAngleTolerance(double t) { angleTolerance = t; }
 
     /**
-     * FILL ME OUT
-     * @param kp FILL ME OUT
-     * @param kd FILL ME OUT
-     * @param ki FILL ME OUT
+     * This controls the Kp, Kd, and Ki values of the PID for the movement of the robot. This control the the curve of how it approaches a target position.
+     * @param kp Increasing this makes the robot move to the target position in a more proportional matter. It will move faster when further from the target position and slower when closer
+     * @param kd This makes the robot slow down if it reaches the targetPosition to quickly by adding a negative force.
+     * @param ki This makes the robot speed up if it does not move to the targetPosition quick enough
      */
     public static void setMovementPID(double kp, double kd, double ki) {
         movementKp = kp;
@@ -208,10 +209,10 @@ public class PreciseMovement {
     }
 
     /**
-     * FILL ME OUT
-     * @param Kp FILL ME OUT
-     * @param Kd FILL ME OUT
-     * @param Ki FILL ME OUT
+     * This controls the Kp, Kd, and Ki values of the PID for the movement of angle turning of the robot. This control the the curve of how it turns to a target angle
+     * @param Kp Increasing this makes the robot move to the target angle in a more proportional matter. It will move faster when further from the target angle and slower when closer
+     * @param Kd This makes the robot slow down if it reaches the target angle to quickly by adding a force in the opposite direction.
+     * @param Ki This makes the robot speed up if it does not move to the target angle quick enough
      */
     public static void setAnglePID(double Kp, double Kd, double Ki) {
         angleKp = Kp;
@@ -225,17 +226,17 @@ public class PreciseMovement {
     /******* PRIVATE FUNCTIONS ********/
     /**
      * FILL ME OUT
-     * @param imu FILL ME OUT
-     * @param fr FILL ME OUT
-     * @param fl FILL ME OUT
-     * @param br FILL ME OUT
-     * @param bl FILL ME OUT
-     * @param oph FILL ME OUT
-     * @param opv FILL ME OUT
-     * @param frRev FILL ME OUT
-     * @param flRev FILL ME OUT
-     * @param brRev FILL ME OUT
-     * @param blRev FILL ME OUT
+     * @param imu initializes IMU
+     * @param fr initializes front right motor
+     * @param fl initializes front left motor
+     * @param br initializes back right motor
+     * @param bl initializes back left motor
+     * @param oph initializes horizontal dead wheel
+     * @param opv initalizes vertical dead wheel
+     * @param frRev controls whter front right motor is reversed
+     * @param flRev controls whter front left motor is reversed
+     * @param brRev controls whter back right motor is reversed
+     * @param blRev controls whter back left motor is reversed
      */
     private static void _init(BNO055IMU imu, DcMotorEx fr, DcMotorEx fl, 
             DcMotorEx br, DcMotorEx bl, DcMotorEx oph, DcMotorEx opv, 
@@ -282,12 +283,12 @@ public class PreciseMovement {
 
     /**
      * FILL ME OUT
-     * @param deltaFl FILL ME OUT
-     * @param deltaFr FILL ME OUT
-     * @param deltaBl FILL ME OUT
-     * @param deltaBr FILL ME OUT
-     * @param robotAngle FILL ME OUT
-     * @return FILL ME OUT
+     * @param deltaFl change in front left motor encoder
+     * @param deltaFr change in front right motor encoder
+     * @param deltaBl change in back left motor encoder
+     * @param deltaBr change in back right motor encoder
+     * @param robotAngle current angle of robot
+     * @return returns vector representing change in robots position
      */
     private static MathVector finalWheelVector(double deltaFl, double deltaFr, double deltaBl, double deltaBr, double robotAngle) {
         MathVector flvector = new MathVector(deltaFl, Math.PI*0.25 + robotAngle);
@@ -298,7 +299,7 @@ public class PreciseMovement {
         MathVector[] wheelVectors = new MathVector[] { flvector, frvector, blvector, brvector };
         // just using a random vector to use the add function in the vector class
         MathVector finalVector = blvector.add(wheelVectors);
-        return new MathVector(finalVector.getMagnitude(), finalVector.getAngle() + robotAngle);
+        return new MathVector(finalVector.magnitude, finalVector.angle + robotAngle);
     }
 
 
@@ -310,7 +311,7 @@ public class PreciseMovement {
      * @return FILL ME OUT
      */
     private static double[] newPosition(double oldX, double oldY, MathVector finalVector) {
-        return new double[] { oldX + finalVector.getX(), oldY + finalVector.getY() };
+        return new double[] { oldX + finalVector.x, oldY + finalVector.y };
     }
 
 
@@ -338,7 +339,7 @@ public class PreciseMovement {
 
 
     /**
-     * FILL ME OUT
+     * converts enoder changes to vectors. Adds imu angle to translate vectors to angle of robot. Adds vectors to find change in robots position.
      * @param rotX FILL ME OUT
      * @param rotY FILL ME OUT
      * @param rx FILL ME OUT
@@ -367,15 +368,15 @@ public class PreciseMovement {
 
     /**
      * FILL ME OUT
-     * @param kp FILL ME OUT
-     * @param kd FILL ME OUT
-     * @param ki FILL ME OUT
-     * @param actualValue FILL ME OUT
-     * @param desiredValue FILL ME OUT
-     * @param integralPrior FILL ME OUT
-     * @param errorPrior FILL ME OUT
-     * @param iterationTime FILL ME OUT
-     * @return FILL ME OUT
+     * @param kp causes actualValue to move to desiredValue in a more proportional matter based on the error(or difference between them)
+     * @param kd causes actual value to decrease if it is moving to quickly toward desiredValue
+     * @param ki causes actual value to increase if it is moving to slowly toward desiredValue
+     * @param actualValue a current value you pass through
+     * @param desiredValue the value you want the actualValue to reach
+     * @param integralPrior the previous integral from the last time the function was called
+     * @param errorPrior the previous error from the last time the function was called
+     * @param iterationTime the time between each time this function is called. Timer will need to be used
+     * @return the amount actualValue should change by to reach the desiredValue
      */
     private static double[] PID(double kp, double kd, double ki, double actualValue, double desiredValue,
                          double integralPrior, double errorPrior, double iterationTime) {
@@ -390,8 +391,8 @@ public class PreciseMovement {
 
 
     /**
-     * FILL ME OUT
-     * @return FILL ME OUT
+     * returns the current angle of the robot
+     * @return current angle of the robot in radians
      */
     private static double currentAngle() {
         return -imu.getAngularOrientation().firstAngle;
