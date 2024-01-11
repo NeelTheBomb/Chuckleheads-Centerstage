@@ -2,7 +2,6 @@ package org.firstinspires.ftc.teamcode.lib;
 
 import com.qualcomm.robotcore.hardware.Servo;
 
-
 /**
  * Autonomous state machine. BROKEN, UNTESTED.
  * @author Nathan W
@@ -42,9 +41,9 @@ public enum AutonomousState {
             int targetX = 0;
             int targetY = 500;
             int stage = 0;
-            
+
             turnToAngle(-90);
-            
+
             if (stage == 0 && moveToPos(targetX, targetY)) {
                 stage = 1;
                 targetX = -100;
@@ -53,7 +52,7 @@ public enum AutonomousState {
             else if (stage == 1 && moveToPos(targetX, targetY)) {
                 return DROP;
             }
-            
+
             return LEFT;
         }
     },
@@ -67,7 +66,7 @@ public enum AutonomousState {
             int targetX = 0;
             int targetY = 600;
             int stage = 0;
-            
+
             if (stage == 0 && moveToPos(targetX, targetY)) {
                 stage = 1;
                 targetX = 0;
@@ -76,7 +75,7 @@ public enum AutonomousState {
             else if (stage == 1 && moveToPos(targetX, targetY)) {
                 return DROP;
             }
-            
+
             return MIDDLE;
         }
     },
@@ -90,9 +89,9 @@ public enum AutonomousState {
             int targetX = 0;
             int targetY = 500;
             int stage = 0;
-            
+
             turnToAngle(90);
-            
+
             if (stage == 0 && moveToPos(targetX, targetY)) {
                 stage = 1;
                 targetX = 100;
@@ -101,7 +100,7 @@ public enum AutonomousState {
             else if (stage == 1 && moveToPos(targetX, targetY)) {
                 return DROP;
             }
-            
+
             return RIGHT;
         }
     },

@@ -66,11 +66,11 @@ public class MathStuff {
     {
         // First we sort the array
         Arrays.sort(a);
- 
+
         // check for even case
         if (n % 2 != 0)
             return (double)a[n / 2];
- 
+
         return (double)(a[(n - 1) / 2] + a[n / 2]) / 2.0;
     }
 
@@ -105,12 +105,12 @@ public class MathStuff {
     public static double shortestAngleRemapped(double currentAngle, double targetAngle) {
         // convert from radians to degrees
         double target_angle = (targetAngle)*(Math.PI/180);
-        
+
         double differenceOne = target_angle - currentAngle;
         double differenceTwo = target_angle + currentAngle;
-        
+
         if (differenceTwo - differenceOne < 0) {
-             return remapRange(-180.0, 180.0, -1.0, 1.0, differenceTwo);
+            return remapRange(-180.0, 180.0, -1.0, 1.0, differenceTwo);
         }
         else {
             return remapRange(-180.0, 180.0, -1.0, 1.0, differenceOne);

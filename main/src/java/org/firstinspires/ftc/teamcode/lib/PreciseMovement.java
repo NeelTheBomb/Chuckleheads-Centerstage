@@ -8,17 +8,14 @@ import com.qualcomm.hardware.bosch.BNO055IMU;
 // our static stuff
 import static org.firstinspires.ftc.teamcode.lib.MathStuff.sqr;
 import static org.firstinspires.ftc.teamcode.lib.MathStuff.shortestAngleRemapped;
+import static org.firstinspires.ftc.teamcode.lib.RobotHardware.*;
 
 
 /**
- * FILL ME OUT
  * This being static could make it broken. Further testing is needed. It may have to be turned into an object you initialize.
  * @author Neel N
  */
 public class PreciseMovement {
-    private static DcMotorEx fr, fl, br, bl, opv, oph;
-    private static BNO055IMU imu;
-
     // MovementPID
     private static double movementKp, movementKi, movementKd, movementIntegralPrior, movementErrorPrior;
 
@@ -30,45 +27,29 @@ public class PreciseMovement {
 
 
     /******* PUBLIC FUNCTIONS ********/
-    /**
-     * initializes class asuming no wheels should be reversed
-     * @param imu internal measurement unit
-     * @param fr front right wheel
-     * @param fl front left wheel
-     * @param br back right wheel
-     * @param bl back left wheel
-     * @param oph horizontal dead wheel
-     * @param opv horizontal vertical wheel
-     */
-    public static void init(BNO055IMU imu, DcMotorEx fr, DcMotorEx fl, 
-            DcMotorEx br, DcMotorEx bl, DcMotorEx oph, DcMotorEx opv) {
+    public static void preciseMovementInit() {
+        PreciseMovement.movementKp = 0.5;
+        PreciseMovement.movementKi = 0.0;
+        PreciseMovement.movementKd = 0.0;
+        PreciseMovement.movementIntegralPrior = 0.0;
+        PreciseMovement.movementErrorPrior = 0.0;
 
-        _init(imu, opv, oph, fr, fl, br, bl, false, false, false, false);
+        PreciseMovement.angleKp = 0.5;
+        PreciseMovement.angleKi = 0.0;
+        PreciseMovement.angleKd = 0.0;
+        PreciseMovement.angleIntegralPrior = 0.0;
+        PreciseMovement.angleErrorPrior = 0.0;
+
+        PreciseMovement.movementTolerance = 10.0;
+        PreciseMovement.angleTolerance = 0.05;
+
+        PreciseMovement.xPos = 0.0;
+        PreciseMovement.yPos = 0.0;
+        PreciseMovement.flPastTick = 0.0;
+        PreciseMovement.frPastTick = 0.0;
+        PreciseMovement.blPastTick = 0.0;
+        PreciseMovement.brPastTick = 0.0;
     }
-
-    /**
-     * initializes class letting you control which wheels are reversed
-     * @param imu internal measurement unit
-     * @param fr front right wheel
-     * @param fl front left wheel
-     * @param br back right wheel
-     * @param bl back left wheel
-     * @param oph horizontal dead wheel
-     * @param opv horizontal vertical wheel
-     * @param frRev boolean, describe if front right motor is reversed or not
-     * @param flRev boolean, describe if front left motor is reversed or not
-     * @param brRev boolean, describe if back right motor is reversed or not
-     * @param blRev boolean, describe if back left motor is reversed or not
-     */
-    public static void init(BNO055IMU imu, DcMotorEx fr, DcMotorEx fl, 
-            DcMotorEx br, DcMotorEx bl, DcMotorEx oph, DcMotorEx opv, 
-            boolean frRev, boolean flRev, boolean brRev, boolean blRev) {
-                
-        _init(imu, opv, oph, fr, fl, br, bl, frRev, flRev, brRev, blRev);
-    }
-
-
-    /******* PUBLIC FUNCTIONS ********/
     /**
      * moves to a predefined position
      * @param targetPosX the target x position you want to robot to move to
@@ -103,7 +84,7 @@ public class PreciseMovement {
     }
 
     /**
-     * Updates the position of the robot. Uses all 4 motor encoders to do this. Finds the delta of encoder value of the motors and turns this into a vector.  
+     * Updates the position of the robot. Uses all 4 motor encoders to do this. Finds the delta of encoder value of the motors and turns this into a vector.
      * Adds these vectors together to find the change in the robots position. Adds this change to the current position to find the updated current position of the robot.
      */
     public static void updatePos() {
@@ -132,7 +113,7 @@ public class PreciseMovement {
     public static double[] updateDeadWheelPos() {
         double ophTick = oph.getCurrentPosition() - ophPastTick;
         double opvTick = opv.getCurrentPosition() - opvPastTick;
-        
+
         MathVector currentVector = finalDeadWheelVector(ophTick, opvTick, -imu.getAngularOrientation().firstAngle);
         double[] pos = newPosition(xPos, yPos, currentVector);
         xPos = pos[0];
@@ -184,7 +165,7 @@ public class PreciseMovement {
 
     /******* SETTERS ********/
     /**
-     * sets tolerance movement that gets used in the robot movement function to determine wheter to return true of not 
+     * sets tolerance movement that gets used in the robot movement function to determine wheter to return true of not
      * @param t tolerance you want for distance from currentPosition to targetPosition. (How precise the movement has to be to a position)
      */
     public static void setMovementTolerance(double t) { movementTolerance = t; }
@@ -225,63 +206,6 @@ public class PreciseMovement {
 
 
     /******* PRIVATE FUNCTIONS ********/
-    /**
-     * FILL ME OUT
-     * @param imu initializes IMU
-     * @param fr initializes front right motor
-     * @param fl initializes front left motor
-     * @param br initializes back right motor
-     * @param bl initializes back left motor
-     * @param oph initializes horizontal dead wheel
-     * @param opv initalizes vertical dead wheel
-     * @param frRev controls whter front right motor is reversed
-     * @param flRev controls whter front left motor is reversed
-     * @param brRev controls whter back right motor is reversed
-     * @param blRev controls whter back left motor is reversed
-     */
-    private static void _init(BNO055IMU imu, DcMotorEx fr, DcMotorEx fl, 
-            DcMotorEx br, DcMotorEx bl, DcMotorEx oph, DcMotorEx opv, 
-            boolean frRev, boolean flRev, boolean brRev, boolean blRev) {
-                
-        PreciseMovement.imu = imu;
-        
-        PreciseMovement.oph = oph;
-        PreciseMovement.opv = opv;
-        
-        PreciseMovement.fr = fr;
-        PreciseMovement.fl = fl;
-        PreciseMovement.br = br;
-        PreciseMovement.bl = bl;
-        
-        if (frRev) { fr.setDirection(DcMotor.Direction.REVERSE); }
-        if (flRev) { fl.setDirection(DcMotor.Direction.REVERSE); }
-        if (brRev) { br.setDirection(DcMotor.Direction.REVERSE); }
-        if (blRev) { bl.setDirection(DcMotor.Direction.REVERSE); }
-
-        PreciseMovement.movementKp = 0.5;
-        PreciseMovement.movementKi = 0.0;
-        PreciseMovement.movementKd = 0.0;
-        PreciseMovement.movementIntegralPrior = 0.0;
-        PreciseMovement.movementErrorPrior = 0.0;
-
-        PreciseMovement.angleKp = 0.5;
-        PreciseMovement.angleKi = 0.0;
-        PreciseMovement.angleKd = 0.0;
-        PreciseMovement.angleIntegralPrior = 0.0;
-        PreciseMovement.angleErrorPrior = 0.0;
-
-        PreciseMovement.movementTolerance = 10.0;
-        PreciseMovement.angleTolerance = 0.05;
-
-        PreciseMovement.xPos = 0.0;
-        PreciseMovement.yPos = 0.0;
-        PreciseMovement.flPastTick = 0.0;
-        PreciseMovement.frPastTick = 0.0;
-        PreciseMovement.blPastTick = 0.0;
-        PreciseMovement.brPastTick = 0.0;
-    }
-
-
     /**
      * FILL ME OUT
      * @param deltaFl change in front left motor encoder
@@ -380,7 +304,7 @@ public class PreciseMovement {
      * @return the amount actualValue should change by to reach the desiredValue
      */
     private static double[] PID(double kp, double kd, double ki, double actualValue, double desiredValue,
-                         double integralPrior, double errorPrior, double iterationTime) {
+                                double integralPrior, double errorPrior, double iterationTime) {
 
         double error = desiredValue - actualValue;
         double integral = integralPrior + error * iterationTime;

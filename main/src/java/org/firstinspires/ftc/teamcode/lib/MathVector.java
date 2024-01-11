@@ -27,7 +27,7 @@ public class MathVector {
             this.magnitude = m;
             this.angle = a;
         }
-        
+
         this.x = Math.cos(a) * m;
         this.y = Math.sin(a) * m;
     }
@@ -37,22 +37,15 @@ public class MathVector {
      * @param Vectors vector array to be added
      * @return returns a new MathVector
      */
-    public MathVector add(MathVector[] vectors) {
+    public static MathVector add(MathVector[] vectors) {
         double totaly = 0;
         double totalx = 0;
         for (int i = 0; i < vectors.length; i++) {
             totalx += vectors[i].x;
-            totaly += vectors[i].y; 
+            totaly += vectors[i].y;
         }
-            
+
         double vectorangle = Math.atan2(totaly, totalx);
-        // if (totalx < 0 && totaly >= 0) {
-        //     angle = (Math.PI) - Math.abs(angle); }
-        // else if (totalx < 0 && totaly < 0) {
-        //     angle = Math.PI + Math.abs(angle); }
-        // else if (totalx > 0 && totaly < 0) {
-        //     angle = (Math.PI) * 2 - Math.abs(angle);
-        // }
         double vectormagnitude = Math.sqrt((totalx*totalx)+(totaly*totaly));
         return new MathVector(vectormagnitude, vectorangle);
     }
