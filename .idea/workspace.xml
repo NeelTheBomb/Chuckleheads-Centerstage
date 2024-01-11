@@ -4,8 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c82a9c55-9380-4be5-91a3-b73a0f22e285" name="Changes" comment="Document RobotHardware">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="c82a9c55-9380-4be5-91a3-b73a0f22e285" name="Changes" comment="generate javadoc">
       <change beforePath="$PROJECT_DIR$/docs/allclasses-index.html" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/docs/allpackages-index.html" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/docs/element-list" beforeDir="false" />
@@ -146,7 +145,7 @@
       <updated>1704602350803</updated>
       <workItem from="1704602351881" duration="406000" />
       <workItem from="1704855016163" duration="691000" />
-      <workItem from="1704937071161" duration="3189000" />
+      <workItem from="1704937071161" duration="3505000" />
     </task>
     <task id="LOCAL-00001" summary="Implement RobotHardware">
       <option name="closed" value="true" />
@@ -180,7 +179,15 @@
       <option name="project" value="LOCAL" />
       <updated>1704939515571</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="generate javadoc">
+      <option name="closed" value="true" />
+      <created>1704940365742</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1704940365742</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -192,6 +199,7 @@
     <MESSAGE value="Update docs" />
     <MESSAGE value="Uncomment code to play nice with Javadoc" />
     <MESSAGE value="Document RobotHardware" />
-    <option name="LAST_COMMIT_MESSAGE" value="Document RobotHardware" />
+    <MESSAGE value="generate javadoc" />
+    <option name="LAST_COMMIT_MESSAGE" value="generate javadoc" />
   </component>
 </project>
