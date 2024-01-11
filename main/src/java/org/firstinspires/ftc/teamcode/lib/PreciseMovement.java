@@ -12,7 +12,10 @@ import static org.firstinspires.ftc.teamcode.lib.RobotHardware.*;
 
 
 /**
- * This being static could make it broken. Further testing is needed. It may have to be turned into an object you initialize.
+ * Autonomous movement. This being static could make it broken. Further testing is needed. It may have to be turned into an object you initialize.
+ *
+ * Note: Since we literally don't have encoders plugged into our motors, the code in here should always use
+ * updateDeadWheelPos() instead of deadWheelPos(). Won't change in case I'm wrong.
  * @author Neel N
  */
 public class PreciseMovement {
@@ -27,6 +30,10 @@ public class PreciseMovement {
 
 
     /******* PUBLIC FUNCTIONS ********/
+    /**
+     * Initialize the starting values. Must be called after RobotHardwareInit().
+     * @see RobotHardware
+     */
     public static void preciseMovementInit() {
         PreciseMovement.movementKp = 0.5;
         PreciseMovement.movementKi = 0.0;
@@ -51,11 +58,11 @@ public class PreciseMovement {
         PreciseMovement.brPastTick = 0.0;
     }
     /**
-     * moves to a predefined position
-     * @param targetPosX the target x position you want to robot to move to
-     * @param targetPosY the target y position you want the robot to move to
-     * @param iterationTime the time between each time this function is called. Have to use a timer in main code this is being used in. Used to make PID more accurate.
-     * @return returns a boolean that is true if the current position is less than 10 away from the target position
+     * attempts to move the robot to the given position
+     * @param targetPosX the x position you want to robot to move to
+     * @param targetPosY the y position you want the robot to move to
+     * @param iterationTime delta-time between now and last loop. Used for the PIDs
+     * @return whether or not the current position is less than movement tolerance
      */
     public static boolean moveToPos(double targetPosX, double targetPosY, double iterationTime) {
         double[] moveConstants = desiredVector(xPos, yPos, targetPosX, targetPosY, iterationTime);
@@ -66,10 +73,10 @@ public class PreciseMovement {
     }
 
     /**
-     * This function moves the robot closer to a target angle from its current angle each time it is called.
+     * attempts to move the robot closer to a target angle from its current angle
      * @param targetAngle the angle the robot should be facing
-     * @param iterationTime the time between each time this function is called. Used for PID
-     * @return returns a boolean that is true of the currentanle is within a set tolerance of the target angle
+     * @param iterationTime delta-time between now and last loop. Used for the PIDs
+     * @return whether or not the current angle is within the angle tolerance
      */
     public static boolean turnToAngle(double targetAngle, double iterationTime) {
         double[] angleValues = PID(angleKp, angleKd, angleKi, -imu.getAngularOrientation().firstAngle, targetAngle,
@@ -107,7 +114,7 @@ public class PreciseMovement {
 
 
     /**
-     * same as update pos but uses deadwheel encoder values instead.
+     * Updates the position of the robot using deadwheel encoders
      * @return returns current position of dead wheels for TESTING purposes. Return can be gotton rid of after.
      */
     public static double[] updateDeadWheelPos() {
@@ -127,7 +134,7 @@ public class PreciseMovement {
 
 
     /**
-     * converts enoder changes to vectors. Adds imu angle to translate vectors to angle of robot. Adds vectors to find change in robots position.
+     * converts encoder changes to vectors. Adds imu angle to translate vectors to angle of robot. Adds vectors to find change in robots position.
      * @param deltaOph Encoder change of horizontal dead wheel
      * @param deltaOpv Encoder change of vertical dead wheel
      * @param robotAngle angle of robot gotton from imu in radians
@@ -145,10 +152,10 @@ public class PreciseMovement {
 
 
     /**
-     * returns the distance the current pos is from the target pos
+     * finds the distance between the current and target robot positions
      * @param targetPosX the x target position
      * @param targetPosY the y target position
-     * @return returns the distance the currentposition is from the target position
+     * @return the distance between the current and target robot positions
      */
     public static double distanceFromPos(double targetPosX, double targetPosY) {
         return Math.sqrt(sqr(targetPosX-xPos) + sqr(targetPosY-yPos));
@@ -157,27 +164,27 @@ public class PreciseMovement {
 
     /******* GETTERS ********/
     /**
-     * getter for position
-     * @return returns the current x and y position as array
+     * gets the current position
+     * @return returns the current x and y position
      */
     public static double[] getPos() { return new double[] { xPos, yPos }; }
 
 
     /******* SETTERS ********/
     /**
-     * sets tolerance movement that gets used in the robot movement function to determine wheter to return true of not
-     * @param t tolerance you want for distance from currentPosition to targetPosition. (How precise the movement has to be to a position)
+     * sets movement tolerance
+     * @param t tolerance you want for distance from currentPosition to targetPosition. (How precise the movement has to be)
      */
     public static void setMovementTolerance(double t) { movementTolerance = t; }
 
     /**
-     * controls the tolerance of whether the turnToAngle returns true. True means it should stop
-     * @param t tolerance of how close robot should get to angle in turnToAngle function
+     * sets angle tolerance
+     * @param t tolerance you want for distance from currentAngle to targetAngle. (How precise the turning has to be)
      */
     public static void setAngleTolerance(double t) { angleTolerance = t; }
 
     /**
-     * This controls the Kp, Kd, and Ki values of the PID for the movement of the robot. This control the the curve of how it approaches a target position.
+     * sets the Kp, Kd, and Ki values of the PID for the movement of the robot. This control the the curve of how it approaches a target position.
      * @param kp Increasing this makes the robot move to the target position in a more proportional matter. It will move faster when further from the target position and slower when closer
      * @param kd This makes the robot slow down if it reaches the targetPosition to quickly by adding a negative force.
      * @param ki This makes the robot speed up if it does not move to the targetPosition quick enough
@@ -191,7 +198,7 @@ public class PreciseMovement {
     }
 
     /**
-     * This controls the Kp, Kd, and Ki values of the PID for the movement of angle turning of the robot. This control the the curve of how it turns to a target angle
+     * sets the Kp, Kd, and Ki values of the PID for the movement of angle turning of the robot. This control the the curve of how it turns to a target angle
      * @param Kp Increasing this makes the robot move to the target angle in a more proportional matter. It will move faster when further from the target angle and slower when closer
      * @param Kd This makes the robot slow down if it reaches the target angle to quickly by adding a force in the opposite direction.
      * @param Ki This makes the robot speed up if it does not move to the target angle quick enough
@@ -264,7 +271,7 @@ public class PreciseMovement {
 
 
     /**
-     * converts enoder changes to vectors. Adds imu angle to translate vectors to angle of robot. Adds vectors to find change in robots position.
+     * converts encoder changes to vectors. Adds imu angle to translate vectors to angle of robot. Adds vectors to find change in robots position.
      * @param rotX FILL ME OUT
      * @param rotY FILL ME OUT
      * @param rx FILL ME OUT
@@ -316,7 +323,7 @@ public class PreciseMovement {
 
 
     /**
-     * returns the current angle of the robot
+     * gets the current angle of the robot in radians
      * @return current angle of the robot in radians
      */
     private static double currentAngle() {

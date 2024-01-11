@@ -23,11 +23,11 @@ public class MathStuff {
 
 
     /**
-     * clamps a value in a range. If value is less than range, gets clamped to min and gets clamped to max vice versa.
+     * clamps a value in a range. Returns min if value < min, max if value > max, and value otherwise
      * @param min minimum value in range
      * @param max maximum value in range
      * @param value value that needs to be clamped
-     * @return if value is outside of range, clamps it to min or max of range
+     * @return the clamped value
      */
     public static double clamp(double min, double max, double value) {
         if (value > max) { return max; }
@@ -37,7 +37,7 @@ public class MathStuff {
 
 
     /**
-     * Function to square an int.
+     * squares an int
      * @param x Int to square
      * @return The int, squared
      */
@@ -47,7 +47,7 @@ public class MathStuff {
 
 
     /**
-     * Function to square a double.
+     * squares a double.
      * @param x Double to square
      * @return The double, squared
      */
@@ -58,28 +58,28 @@ public class MathStuff {
 
     /**
      * returns median value in an array
-     * @param a array of integers
-     * @param n length of array
-     * @return the median value of array a
+     * @param an integer array
+     * @return the median value of the array
      */
-    public static double findMedian(int a[], int n)
-    {
-        // First we sort the array
+    public static double findMedian(int a[]) {
+        let n = a.length;
+
         Arrays.sort(a);
 
         // check for even case
-        if (n % 2 != 0)
-            return (double)a[n / 2];
+        if (n % 2 != 0) {
+            return (double) a[n / 2];
+        }
 
         return (double)(a[(n - 1) / 2] + a[n / 2]) / 2.0;
     }
 
 
     /**
-     * This returns an integer in num[] that is closest to value
-     * @param nums array of integers that gets compared to value
-     * @param value value to compare to
-     * @return returns which interger in nums is closest to value
+     * returns the number in an array closest to the given value
+     * @param nums array of integers to compare to value
+     * @param value number to compare to
+     * @return returns double closest to value
      */
     public static int smallestDiff(int nums[], int value) {
         int smallestDifference = 250;
@@ -96,10 +96,10 @@ public class MathStuff {
 
 
     /**
-     * This returns a value from -1 to 1 representing how much to robot needs to turn to reach its target angle.
-     * @param currentAngle the current angle of the robot in degrees.
-     * @param targetAngle than angle you want ot robot to face in degrees
-     * @return Returns value from -1 to 1 representing how much the robot should turn to reach the current angle. 
+     * Finds a value from -1 to 1 representing how much the robot needs to turn to reach the given target angle
+     * @param currentAngle the current angle of the robot in degrees
+     * @param targetAngle than angle in degrees you want the robot to face
+     * @return Value from -1 to 1 representing how much the robot should turn to reach the current angle.
      * This value can be plugged as the turn constant in the driving code 
      */
     public static double shortestAngleRemapped(double currentAngle, double targetAngle) {

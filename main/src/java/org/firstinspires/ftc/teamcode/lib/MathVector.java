@@ -35,7 +35,7 @@ public class MathVector {
     /**
      * adds an array of vectors together
      * @param Vectors vector array to be added
-     * @return returns a new MathVector
+     * @return returns sum of all vectors
      */
     public static MathVector add(MathVector[] vectors) {
         double totaly = 0;

@@ -22,7 +22,7 @@ public class RobotHardware {
      * Initialize the hardware variables
      * @param hardwareMap HardwareMap from the Opmode
      */
-    public static void hardwareInit(HardwareMap hardwareMap) {
+    public static void robotHardwareInit(HardwareMap hardwareMap) {
         // Declare our motors
         fl = hardwareMap.get(DcMotorEx.class, "frontLeft");     // front left
         bl = hardwareMap.get(DcMotorEx.class, "backLeft");      // back left

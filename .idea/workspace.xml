@@ -4,57 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c82a9c55-9380-4be5-91a3-b73a0f22e285" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/docs/index-all.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/org/firstinspires/ftc/teamcode/lib/RobotHardware.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="c82a9c55-9380-4be5-91a3-b73a0f22e285" name="Changes" comment="Implement RobotHardware">
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/allclasses-index.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/allclasses-index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/allpackages-index.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/allpackages-index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/element-list" beforeDir="false" afterPath="$PROJECT_DIR$/docs/element-list" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/help-doc.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/help-doc.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/index-files/index-1.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/index-files/index-10.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/index-files/index-11.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/index-files/index-12.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/index-files/index-13.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/index-files/index-14.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/index-files/index-15.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/index-files/index-16.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/index-files/index-17.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/index-files/index-2.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/index-files/index-3.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/index-files/index-4.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/index-files/index-5.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/index-files/index-6.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/index-files/index-7.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/index-files/index-8.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/index-files/index-9.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/legal/ADDITIONAL_LICENSE_INFO" beforeDir="false" afterPath="$PROJECT_DIR$/docs/legal/ADDITIONAL_LICENSE_INFO" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/legal/ASSEMBLY_EXCEPTION" beforeDir="false" afterPath="$PROJECT_DIR$/docs/legal/ASSEMBLY_EXCEPTION" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/legal/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/docs/legal/LICENSE" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/legal/jqueryUI.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/legal/jqueryUI.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/member-search-index.js" beforeDir="false" afterPath="$PROJECT_DIR$/docs/member-search-index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/org/firstinspires/ftc/teamcode/centerstage/Teleop.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/org/firstinspires/ftc/teamcode/lib/MathVector.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/org/firstinspires/ftc/teamcode/centerstage/package-summary.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/org/firstinspires/ftc/teamcode/centerstage/package-tree.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/org/firstinspires/ftc/teamcode/lib/Alliance.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/org/firstinspires/ftc/teamcode/lib/Alliance.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/org/firstinspires/ftc/teamcode/lib/AutonomousState.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/org/firstinspires/ftc/teamcode/lib/AutonomousState.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/org/firstinspires/ftc/teamcode/lib/MathStuff.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/org/firstinspires/ftc/teamcode/lib/MathStuff.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/org/firstinspires/ftc/teamcode/lib/PreciseMovement.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/org/firstinspires/ftc/teamcode/lib/PreciseMovement.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/org/firstinspires/ftc/teamcode/lib/Side.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/org/firstinspires/ftc/teamcode/lib/Side.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/org/firstinspires/ftc/teamcode/lib/Vector.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/org/firstinspires/ftc/teamcode/lib/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/org/firstinspires/ftc/teamcode/lib/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/org/firstinspires/ftc/teamcode/lib/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/org/firstinspires/ftc/teamcode/lib/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/overview-summary.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/overview-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/overview-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/package-search-index.js" beforeDir="false" afterPath="$PROJECT_DIR$/docs/package-search-index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/script-dir/jquery-ui.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/docs/script-dir/jquery-ui.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/script-dir/jquery-ui.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/docs/script-dir/jquery-ui.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/type-search-index.js" beforeDir="false" afterPath="$PROJECT_DIR$/docs/type-search-index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/src/java/org/firstinspires/ftc/teamcode/lib/MathStuff.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/src/java/org/firstinspires/ftc/teamcode/lib/MathStuff.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/src/java/org/firstinspires/ftc/teamcode/lib/MathVector.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/src/java/org/firstinspires/ftc/teamcode/lib/MathVector.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main/src/java/org/firstinspires/ftc/teamcode/lib/PreciseMovement.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/src/java/org/firstinspires/ftc/teamcode/lib/PreciseMovement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/src/java/org/firstinspires/ftc/teamcode/lib/RobotHardware.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/src/java/org/firstinspires/ftc/teamcode/lib/RobotHardware.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,7 +24,6 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="MacroExpansionManager">
     <option name="directoryName" value="pex1x2ut" />
@@ -95,6 +50,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/natew/IdeaProjects/Chuckleheads-Centerstage/gradle/main/src",
     "node.js.detected.package.eslint": "true",
@@ -118,6 +74,17 @@
     <configuration name="index.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/Chuckleheads-Centerstage/docs/index.html" useBuiltInWebServerPort="true">
       <method v="2" />
     </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="JavaScript Debug.index.html" />
@@ -134,7 +101,17 @@
       <updated>1704602350803</updated>
       <workItem from="1704602351881" duration="406000" />
       <workItem from="1704855016163" duration="691000" />
+      <workItem from="1704937071161" duration="1545000" />
     </task>
+    <task id="LOCAL-00001" summary="Implement RobotHardware">
+      <option name="closed" value="true" />
+      <created>1704937191843</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1704937191843</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -142,5 +119,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="Implement RobotHardware" />
+    <option name="LAST_COMMIT_MESSAGE" value="Implement RobotHardware" />
   </component>
 </project>
