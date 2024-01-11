@@ -23,7 +23,6 @@ public class AutoBlueLeft extends LinearOpMode {
         waitForStart();
 
         while (opModeIsActive()) {
-            //fl.setPower(0.5);
             PreciseMovement.moveToPos(1, 100, 1);
             PreciseMovement.updatePos();
 

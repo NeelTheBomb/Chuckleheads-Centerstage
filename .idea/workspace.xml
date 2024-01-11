@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c82a9c55-9380-4be5-91a3-b73a0f22e285" name="Changes" comment="Implement RobotHardware">
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/src/java/org/firstinspires/ftc/teamcode/lib/MathStuff.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/src/java/org/firstinspires/ftc/teamcode/lib/MathStuff.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/src/java/org/firstinspires/ftc/teamcode/lib/MathVector.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/src/java/org/firstinspires/ftc/teamcode/lib/MathVector.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/src/java/org/firstinspires/ftc/teamcode/lib/PreciseMovement.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/src/java/org/firstinspires/ftc/teamcode/lib/PreciseMovement.java" afterDir="false" />
+    <list default="true" id="c82a9c55-9380-4be5-91a3-b73a0f22e285" name="Changes" comment="Update docs">
       <change beforePath="$PROJECT_DIR$/main/src/java/org/firstinspires/ftc/teamcode/lib/RobotHardware.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/src/java/org/firstinspires/ftc/teamcode/lib/RobotHardware.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -101,7 +96,7 @@
       <updated>1704602350803</updated>
       <workItem from="1704602351881" duration="406000" />
       <workItem from="1704855016163" duration="691000" />
-      <workItem from="1704937071161" duration="1545000" />
+      <workItem from="1704937071161" duration="1853000" />
     </task>
     <task id="LOCAL-00001" summary="Implement RobotHardware">
       <option name="closed" value="true" />
@@ -111,7 +106,15 @@
       <option name="project" value="LOCAL" />
       <updated>1704937191843</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Update docs">
+      <option name="closed" value="true" />
+      <created>1704938656053</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1704938656053</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -120,6 +123,7 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Implement RobotHardware" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implement RobotHardware" />
+    <MESSAGE value="Update docs" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update docs" />
   </component>
 </project>
