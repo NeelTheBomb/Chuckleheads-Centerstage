@@ -118,7 +118,7 @@ public class RobotHardware {
          iwl.setDirection(Servo.Direction.REVERSE);
          gr.setDirection(Servo.Direction.REVERSE);
 
-         set zero power behavior
+         // set zero power behavior
          arm.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
          ia.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
          slide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
