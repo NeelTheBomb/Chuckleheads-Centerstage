@@ -254,8 +254,8 @@ public class Teleop extends LinearOpMode {
              moveGripperServo += .005;
          }
 
-         lg.setPosition(moveGripperServo);
-         rg.setPosition(moveGripperServo);
+         gl.setPosition(moveGripperServo);
+         gr.setPosition(moveGripperServo);
      }
 
 

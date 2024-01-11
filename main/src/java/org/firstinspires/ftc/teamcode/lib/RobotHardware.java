@@ -13,9 +13,67 @@ import com.qualcomm.hardware.bosch.BNO055IMU;
  * @author Nathan W
  */
 public class RobotHardware {
-    public static DcMotorEx fl, bl, fr, br, opv, oph;
-    // ia, is, slide, arm = null;
-    // public static Servo iwl, iwr, lg, rg = null;
+    /**
+     * front left motor
+     */
+    public static DcMotorEx fl = null;
+    /**
+     * back left motor
+     */
+    public static DcMotorEx bl = null;
+    /**
+     * front right motor
+     */
+    public static DcMotorEx fr = null;
+    /**
+     * back right motor
+     */
+    public static DcMotorEx br = null;
+    /**
+     * horizontal odometrty pod
+     */
+    public static DcMotorEx oph = null;
+    /**
+     * vertical odometry pod
+     */
+    public static DcMotorEx opv = null;
+    /**
+     * intake arm motor
+     */
+    public static DcMotorEx ia = null;
+    /**
+     * intake slide motor
+     */
+    public static DcMotorEx is = null;
+    /**
+     * FILL ME OUT
+     */
+    public static DcMotorEx slide = null;
+    /**
+     * FILL ME OUT
+     */
+    public static DcMotorEx arm = null;
+
+    /**
+     * left intake wrist servo
+     */
+    public static Servo iwl = null;
+    /**
+     * right intake wrist servo
+     */
+    public static Servo iwr = null;
+    /**
+     * left gripper
+     */
+    public static Servo gl = null;
+    /**
+     * right gripper
+     */
+    public static Servo gr = null;
+
+    /**
+     * internal measurement unit on the robot
+     */
     public static BNO055IMU imu = null;
 
     /**
@@ -36,8 +94,8 @@ public class RobotHardware {
          arm = hardwareMap.get(DcMotorEx.class, "arm");          // worm gear arm
          iwl = hardwareMap.get(Servo.class, "intakeWristLeft");  // intake wrist left
          iwr = hardwareMap.get(Servo.class, "intakeWristRight"); // intake wrist right
-         lg = hardwareMap.get(Servo.class, "lGrip");             // left gripper
-         rg = hardwareMap.get(Servo.class, "rGrip");             // right gripper
+         gl = hardwareMap.get(Servo.class, "lGrip");             // left gripper
+         gr = hardwareMap.get(Servo.class, "rGrip");             // right gripper
 
         // reset encoders
         fl.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -58,7 +116,7 @@ public class RobotHardware {
         fl.setDirection(DcMotor.Direction.REVERSE);
         bl.setDirection(DcMotor.Direction.REVERSE);
          iwl.setDirection(Servo.Direction.REVERSE);
-         rg.setDirection(Servo.Direction.REVERSE);
+         gr.setDirection(Servo.Direction.REVERSE);
 
          set zero power behavior
          arm.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -94,8 +152,8 @@ public class RobotHardware {
      * Opens the gripper
      */
     public static void gripperOpen() {
-        lg.setPosition(0.2);
-        rg.setPosition(0.2);
+        gl.setPosition(0.2);
+        gr.setPosition(0.2);
     }
 
 
@@ -103,7 +161,7 @@ public class RobotHardware {
      * Closes the gripper
      */
     public static void gripperClose() {
-        lg.setPosition(0.0);
-        rg.setPosition(0.0);
+        gl.setPosition(0.0);
+        gr.setPosition(0.0);
     }
 }
