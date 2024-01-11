@@ -88,23 +88,23 @@ public class RobotHardware {
         br = hardwareMap.get(DcMotorEx.class, "backRight");     // back right
         oph = hardwareMap.get(DcMotorEx.class, "frontLeft");
         opv = hardwareMap.get(DcMotorEx.class, "frontRight");
-         slide = hardwareMap.get(DcMotorEx.class, "slide");      // slide
-         ia = hardwareMap.get(DcMotorEx.class, "intakeArm");     // intake arm
-         is = hardwareMap.get(DcMotorEx.class, "intakeSpinner"); // instake spinner
-         arm = hardwareMap.get(DcMotorEx.class, "arm");          // worm gear arm
-         iwl = hardwareMap.get(Servo.class, "intakeWristLeft");  // intake wrist left
-         iwr = hardwareMap.get(Servo.class, "intakeWristRight"); // intake wrist right
-         gl = hardwareMap.get(Servo.class, "lGrip");             // left gripper
-         gr = hardwareMap.get(Servo.class, "rGrip");             // right gripper
+        slide = hardwareMap.get(DcMotorEx.class, "slide");      // slide
+        ia = hardwareMap.get(DcMotorEx.class, "intakeArm");     // intake arm
+        is = hardwareMap.get(DcMotorEx.class, "intakeSpinner"); // instake spinner
+        arm = hardwareMap.get(DcMotorEx.class, "arm");          // worm gear arm
+        iwl = hardwareMap.get(Servo.class, "intakeWristLeft");  // intake wrist left
+        iwr = hardwareMap.get(Servo.class, "intakeWristRight"); // intake wrist right
+        gl = hardwareMap.get(Servo.class, "lGrip");             // left gripper
+        gr = hardwareMap.get(Servo.class, "rGrip");             // right gripper
 
         // reset encoders
         fl.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         fr.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         bl.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         br.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-         ia.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-         is.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-         slide.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        ia.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        is.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        slide.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         // set modes
         fl.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -115,13 +115,13 @@ public class RobotHardware {
         // reverse stuff
         fl.setDirection(DcMotor.Direction.REVERSE);
         bl.setDirection(DcMotor.Direction.REVERSE);
-         iwl.setDirection(Servo.Direction.REVERSE);
-         gr.setDirection(Servo.Direction.REVERSE);
+        iwl.setDirection(Servo.Direction.REVERSE);
+        gr.setDirection(Servo.Direction.REVERSE);
 
-         // set zero power behavior
-         arm.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-         ia.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-         slide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        // set zero power behavior
+        arm.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        ia.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        slide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         // Retrieve the IMU from the hardware map
         imu = hardwareMap.get(BNO055IMU.class, "gyro");

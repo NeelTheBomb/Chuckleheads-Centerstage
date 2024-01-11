@@ -62,7 +62,7 @@ public class MathStuff {
      * @return the median value of the array
      */
     public static double findMedian(int a[]) {
-        let n = a.length;
+        int n = a.length;
 
         Arrays.sort(a);
 

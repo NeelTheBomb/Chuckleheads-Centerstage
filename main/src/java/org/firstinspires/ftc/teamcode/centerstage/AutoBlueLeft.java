@@ -18,7 +18,7 @@ import static org.firstinspires.ftc.teamcode.lib.PreciseMovement.preciseMovement
 public class AutoBlueLeft extends LinearOpMode {
     @Override
     public void runOpMode() {
-        hardwareInit(hardwareMap);
+        robotHardwareInit(hardwareMap);
         preciseMovementInit();
         waitForStart();
 

@@ -15,7 +15,8 @@ import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.CRServo;
 
-// our static variables
+// our static stuff
+import static org.firstinspires.ftc.teamcode.lib.MathStuff.remapRange;
 import static org.firstinspires.ftc.teamcode.lib.RobotHardware.*;
 
 
@@ -29,7 +30,7 @@ public class Teleop extends LinearOpMode {
 
     @Override
     public void runOpMode() {
-        hardwareInit(hardwareMap);
+        robotHardwareInit(hardwareMap);
 
         // wait until init is pressed
         waitForStart();
@@ -37,15 +38,15 @@ public class Teleop extends LinearOpMode {
         while (opModeIsActive()) {
             setIsGunnerActive();
             move();
-             intake();
-             intakeArm();
-             intakeWrist();
-             intakeLaunch();
-             intakeSpinnerMove();
-             slide();
-             armMove();
-             gripsForward();
-             sucks(); // fix: rename
+            intake();
+            intakeArm();
+            intakeWrist();
+            intakeLaunch();
+            intakeSpinnerMove();
+            slide();
+            armMove();
+            gripsForward();
+            sucks(); // fix: rename
             ImuReinit();
 
             telemetry.update();
@@ -101,200 +102,200 @@ public class Teleop extends LinearOpMode {
     }
 
 
-     private void slide() {
-         slide.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+    private void slide() {
+        slide.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
-         final int LOWEST_POSITION = 0;
-         final int HIGHEST_POSITION = 2500;
+        final int LOWEST_POSITION = 0;
+        final int HIGHEST_POSITION = 2500;
 
-         // left trigger down, right trigger up
-         double triggerInput = gamepad2.right_trigger - gamepad2.left_trigger;
-         double currentPosition = slide.getCurrentPosition();
-         double remapControl = 1.5; // fix: vague name
+        // left trigger down, right trigger up
+        double triggerInput = gamepad2.right_trigger - gamepad2.left_trigger;
+        double currentPosition = slide.getCurrentPosition();
+        double remapControl = 1.5; // fix: vague name
 
-         if (currentPosition < LOWEST_POSITION) {
-             slide.setPower(0.1);
-         }
-         else if (currentPosition > HIGHEST_POSITION) {
-             slide.setPower(-0.1);
-         }
-         else if (triggerInput > 0.3) {
-         // if either trigger pressed
-             double powerControl = remapRange(LOWEST_POSITION, HIGHEST_POSITION, 0, remapControl, currentPosition);
-             powerControl = 1 / Math.pow(Math.abs(powerControl), 3);
-             slide.setPower(powerControl * triggerInput);
-         }
-         else if (triggerInput < -0.3) {
-             double powerControl = remapRange(HIGHEST_POSITION, LOWEST_POSITION-20, 0, remapControl, currentPosition);
-             powerControl = 1 / Math.pow(Math.abs(powerControl), 3);
+        if (currentPosition < LOWEST_POSITION) {
+            slide.setPower(0.1);
+        }
+        else if (currentPosition > HIGHEST_POSITION) {
+            slide.setPower(-0.1);
+        }
+        else if (triggerInput > 0.3) {
+            // if either trigger pressed
+            double powerControl = remapRange(LOWEST_POSITION, HIGHEST_POSITION, 0, remapControl, currentPosition);
+            powerControl = 1 / Math.pow(Math.abs(powerControl), 3);
+            slide.setPower(powerControl * triggerInput);
+        }
+        else if (triggerInput < -0.3) {
+            double powerControl = remapRange(HIGHEST_POSITION, LOWEST_POSITION-20, 0, remapControl, currentPosition);
+            powerControl = 1 / Math.pow(Math.abs(powerControl), 3);
 
-             slide.setPower(powerControl*triggerInput);
-         }
-         else {
-             slide.setPower(0);
-         }
+            slide.setPower(powerControl*triggerInput);
+        }
+        else {
+            slide.setPower(0);
+        }
 
-         telemetry.addData("currentPosition", currentPosition);
-     }
-
-
-     void intake() {
-         intakeArm();
-         intakeWrist();
-     }
+        telemetry.addData("currentPosition", currentPosition);
+    }
 
 
-     void intakeArm() {
-         // manual control
-         if (gamepad2.dpad_down) {
-             setMotorMode(ia, DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-             ia.setPower(0.25);
-             return;
-         }
-         else if (gamepad2.dpad_up) {
-             setMotorMode(ia, DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-             ia.setPower(-0.25);
-             return;
-         }
-         else {
-             ia.setPower(0);
-         }
-
-         // auto positioning
-         if (gamepad2.b && gamepad2.x) {
-             ia.setTargetPosition(400);
-             ia.setVelocity(500);
-             ia.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-         }
-         else if (gamepad2.x) {
-             ia.setVelocity(600.0);
-             ia.setTargetPosition(1679);
-             ia.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-         }
-         else if (gamepad2.b) {
-             ia.setTargetPosition(700);
-             ia.setVelocity(700);
-             ia.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-         }
-     }
+    void intake() {
+        intakeArm();
+        intakeWrist();
+    }
 
 
-     private void intakeWrist() {
-         if (gamepad2.a) {
-             iwl.setPosition(.04);
-             iwr.setPosition(.04);
-         }
-         else if (gamepad2.y) {
-             iwl.setPosition(.281);
-             iwr.setPosition(.281);
-         }
-     }
+    void intakeArm() {
+        // manual control
+        if (gamepad2.dpad_down) {
+            setMotorMode(ia, DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+            ia.setPower(0.25);
+            return;
+        }
+        else if (gamepad2.dpad_up) {
+            setMotorMode(ia, DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+            ia.setPower(-0.25);
+            return;
+        }
+        else {
+            ia.setPower(0);
+        }
+
+        // auto positioning
+        if (gamepad2.b && gamepad2.x) {
+            ia.setTargetPosition(400);
+            ia.setVelocity(500);
+            ia.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        }
+        else if (gamepad2.x) {
+            ia.setVelocity(600.0);
+            ia.setTargetPosition(1679);
+            ia.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        }
+        else if (gamepad2.b) {
+            ia.setTargetPosition(700);
+            ia.setVelocity(700);
+            ia.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        }
+    }
 
 
-     private void intakeStart() {
-         iwl.setPosition(0.0);
-         iwr.setPosition(0.0);
-     }
+    private void intakeWrist() {
+        if (gamepad2.a) {
+            iwl.setPosition(.04);
+            iwr.setPosition(.04);
+        }
+        else if (gamepad2.y) {
+            iwl.setPosition(.281);
+            iwr.setPosition(.281);
+        }
+    }
 
 
-     private void intakeLaunch() {
-         if (gamepad2.right_stick_button && gamepad2.left_stick_button){
-             iwl.setPosition(20.0);
-             iwr.setPosition(-20.0);
-             if (servoPosCheck())
-             {
-                 sleep(200);
-                 iwl.setPosition(0.0);
-                 iwr.setPosition(0.0);
-             }
-         }
-     }
+    private void intakeStart() {
+        iwl.setPosition(0.0);
+        iwr.setPosition(0.0);
+    }
 
 
-     private boolean servoPosCheck() {
-         final double tolerance = 0.1;
-         if (((iwl.getPosition() - 20.0)< tolerance) && ((iwr.getPosition() + 20.0) < tolerance)) {
-             return true;
-         }
-         else {
-             return false;
-         }
-     }
+    private void intakeLaunch() {
+        if (gamepad2.right_stick_button && gamepad2.left_stick_button){
+            iwl.setPosition(20.0);
+            iwr.setPosition(-20.0);
+            if (servoPosCheck())
+            {
+                sleep(200);
+                iwl.setPosition(0.0);
+                iwr.setPosition(0.0);
+            }
+        }
+    }
 
 
-     void setMotorMode(DcMotorEx motor, DcMotor.RunMode mode) {
-         if (motor.getMode() != mode) {
-             motor.setMode(mode);
-         }
-     }
+    private boolean servoPosCheck() {
+        final double tolerance = 0.1;
+        if (((iwl.getPosition() - 20.0)< tolerance) && ((iwr.getPosition() + 20.0) < tolerance)) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 
 
-     private void intakeSpinnerMove() {
-
-         if (gamepad2.dpad_left) {
-             while (gamepad2.dpad_left) {
-                 is.setPower(0.2);
-             }
-         }
-         else {
-             if (gamepad2.dpad_right) {
-                 while (gamepad2.dpad_right) {
-                   is.setPower(-0.2) ;
-                 }
-             }
-         }
-     }
+    void setMotorMode(DcMotorEx motor, DcMotor.RunMode mode) {
+        if (motor.getMode() != mode) {
+            motor.setMode(mode);
+        }
+    }
 
 
-     private void gripsForward() {
-         if (gamepad2.left_stick_button && !gamepad2.right_stick_button) {
-             moveGripperServo = 0;
-         }
-         if (gamepad2.right_stick_button && !gamepad2.left_stick_button) {
-             moveGripperServo += .005;
-         }
+    private void intakeSpinnerMove() {
 
-         gl.setPosition(moveGripperServo);
-         gr.setPosition(moveGripperServo);
-     }
-
-
-     private void sucks() { // fix: rename
-         if ((gamepad2.left_stick_y) > 0.2) {
-             is.setPower(gamepad2.left_stick_y/4);
-         }
-         else if (gamepad2.left_stick_y < 0.2) {
-             is.setPower(gamepad2.left_stick_y);
-         }
-         else {
-             is.setPower(0);
-         }
-     }
+        if (gamepad2.dpad_left) {
+            while (gamepad2.dpad_left) {
+                is.setPower(0.2);
+            }
+        }
+        else {
+            if (gamepad2.dpad_right) {
+                while (gamepad2.dpad_right) {
+                    is.setPower(-0.2) ;
+                }
+            }
+        }
+    }
 
 
-     private void armMove() {
-         if (gamepad2.right_bumper && gamepad2.left_bumper) {
-             arm.setTargetPosition(0);
-             arm.setVelocity(500);
-             arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-         }
-         else if (gamepad2.right_bumper) {
-             while (gamepad2.right_bumper) {
-                 arm.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-                 arm.setPower(0.2);
-             }
-         }
-         else if (gamepad2.left_bumper) {
-             while (gamepad2.left_bumper) { // fix: under no circumstances should we use whiles. they break the flow of the entire opmode
-                 arm.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-                 arm.setPower(-0.2);
-             }
-         }
-         else {
-             arm.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-             arm.setPower(0);
-         }
-     }
+    private void gripsForward() {
+        if (gamepad2.left_stick_button && !gamepad2.right_stick_button) {
+            moveGripperServo = 0;
+        }
+        if (gamepad2.right_stick_button && !gamepad2.left_stick_button) {
+            moveGripperServo += .005;
+        }
+
+        gl.setPosition(moveGripperServo);
+        gr.setPosition(moveGripperServo);
+    }
+
+
+    private void sucks() { // fix: rename
+        if ((gamepad2.left_stick_y) > 0.2) {
+            is.setPower(gamepad2.left_stick_y/4);
+        }
+        else if (gamepad2.left_stick_y < 0.2) {
+            is.setPower(gamepad2.left_stick_y);
+        }
+        else {
+            is.setPower(0);
+        }
+    }
+
+
+    private void armMove() {
+        if (gamepad2.right_bumper && gamepad2.left_bumper) {
+            arm.setTargetPosition(0);
+            arm.setVelocity(500);
+            arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        }
+        else if (gamepad2.right_bumper) {
+            while (gamepad2.right_bumper) {
+                arm.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+                arm.setPower(0.2);
+            }
+        }
+        else if (gamepad2.left_bumper) {
+            while (gamepad2.left_bumper) { // fix: under no circumstances should we use whiles. they break the flow of the entire opmode
+                arm.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+                arm.setPower(-0.2);
+            }
+        }
+        else {
+            arm.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+            arm.setPower(0);
+        }
+    }
 
 
     private void ImuReinit() {

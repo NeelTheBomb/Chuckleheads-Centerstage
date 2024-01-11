@@ -5,41 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c82a9c55-9380-4be5-91a3-b73a0f22e285" name="Changes" comment="generate javadoc">
-      <change beforePath="$PROJECT_DIR$/docs/allclasses-index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/allpackages-index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/element-list" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/help-doc.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/index-all.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/jquery-ui.overrides.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/legal/ADDITIONAL_LICENSE_INFO" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/legal/ASSEMBLY_EXCEPTION" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/legal/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/legal/jquery.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/legal/jqueryUI.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/member-search-index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/module-search-index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/org/firstinspires/ftc/teamcode/lib/Alliance.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/org/firstinspires/ftc/teamcode/lib/AutonomousState.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/org/firstinspires/ftc/teamcode/lib/MathStuff.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/org/firstinspires/ftc/teamcode/lib/MathVector.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/org/firstinspires/ftc/teamcode/lib/PreciseMovement.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/org/firstinspires/ftc/teamcode/lib/RobotHardware.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/org/firstinspires/ftc/teamcode/lib/Side.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/org/firstinspires/ftc/teamcode/lib/package-summary.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/org/firstinspires/ftc/teamcode/lib/package-tree.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/overview-tree.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/package-search-index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/resources/glass.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/resources/x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/script-dir/jquery-3.6.1.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/script-dir/jquery-ui.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/script-dir/jquery-ui.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/script.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/search.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/stylesheet.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/tag-search-index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/type-search-index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/src/java/org/firstinspires/ftc/teamcode/centerstage/AutoLeftBlue.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/src/java/org/firstinspires/ftc/teamcode/centerstage/AutoBlueLeft.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/src/java/org/firstinspires/ftc/teamcode/centerstage/Teleop.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/src/java/org/firstinspires/ftc/teamcode/centerstage/Teleop.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/src/java/org/firstinspires/ftc/teamcode/lib/MathStuff.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/src/java/org/firstinspires/ftc/teamcode/lib/MathStuff.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,6 +22,7 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="GitHubPullRequestSearchHistory"><![CDATA[{
   "lastFilter": {
@@ -145,7 +115,7 @@
       <updated>1704602350803</updated>
       <workItem from="1704602351881" duration="406000" />
       <workItem from="1704855016163" duration="691000" />
-      <workItem from="1704937071161" duration="3505000" />
+      <workItem from="1704937071161" duration="4268000" />
     </task>
     <task id="LOCAL-00001" summary="Implement RobotHardware">
       <option name="closed" value="true" />
@@ -187,7 +157,31 @@
       <option name="project" value="LOCAL" />
       <updated>1704940365742</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="generate javadoc">
+      <option name="closed" value="true" />
+      <created>1704940614347</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1704940614347</updated>
+    </task>
+    <task id="LOCAL-00007" summary="generate javadoc">
+      <option name="closed" value="true" />
+      <created>1704940692437</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1704940692437</updated>
+    </task>
+    <task id="LOCAL-00008" summary="generate javadoc">
+      <option name="closed" value="true" />
+      <created>1704940859348</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1704940859348</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
