@@ -12,10 +12,7 @@ import static org.firstinspires.ftc.teamcode.lib.RobotHardware.*;
 
 
 /**
- * Autonomous movement. This being static could make it broken. Further testing is needed. It may have to be turned into an object you initialize.
- *
- * Note: Since we literally don't have encoders plugged into our motors, the code in here should always use
- * updateDeadWheelPos() instead of deadWheelPos(). Won't change in case I'm wrong.
+ * Autonomous movement.
  * @author Neel N
  */
 public class PreciseMovement {
@@ -26,16 +23,16 @@ public class PreciseMovement {
     private static double angleKp, angleKi, angleKd, angleIntegralPrior, angleErrorPrior, movementTolerance, angleTolerance;
 
     // Positions and Motor Ticks
-    private static double xPos, yPos, flPastTick, frPastTick, blPastTick, brPastTick, opvPastTick, ophPastTick;
+    private static double xPos, yPos, ophPastTick, opvPastTick;
 
 
     /******* PUBLIC FUNCTIONS ********/
     /**
-     * Initialize the starting values. Must be called after RobotHardwareInit().
+     *  ialize the starting values. Must be called after RobotHardwareInit().
      * @see RobotHardware
      */
     public static void preciseMovementInit() {
-        PreciseMovement.movementKp = 0.5;
+        PreciseMovement.movementKp = 0.1;
         PreciseMovement.movementKi = 0.0;
         PreciseMovement.movementKd = 0.0;
         PreciseMovement.movementIntegralPrior = 0.0;
@@ -52,10 +49,6 @@ public class PreciseMovement {
 
         PreciseMovement.xPos = 0.0;
         PreciseMovement.yPos = 0.0;
-        PreciseMovement.flPastTick = 0.0;
-        PreciseMovement.frPastTick = 0.0;
-        PreciseMovement.blPastTick = 0.0;
-        PreciseMovement.brPastTick = 0.0;
     }
     /**
      * attempts to move the robot to the given position
@@ -65,9 +58,12 @@ public class PreciseMovement {
      * @return whether or not the current position is less than movement tolerance
      */
     public static boolean moveToPos(double targetPosX, double targetPosY, double iterationTime) {
+        updatePos();
         double[] moveConstants = desiredVector(xPos, yPos, targetPosX, targetPosY, iterationTime);
-
-        robotMove(moveConstants[0], moveConstants[1], 0);
+        
+        if (Math.abs(xPos - targetPosX) > movementTolerance && Math.abs(yPos - targetPosY) > movementTolerance) {
+            robotMove(moveConstants[0], moveConstants[1], 0);
+        }
 
         return distanceFromPos(targetPosX, targetPosY) < movementTolerance;
     }
@@ -79,7 +75,7 @@ public class PreciseMovement {
      * @return whether or not the current angle is within the angle tolerance
      */
     public static boolean turnToAngle(double targetAngle, double iterationTime) {
-        double[] angleValues = PID(angleKp, angleKd, angleKi, -imu.getAngularOrientation().firstAngle, targetAngle,
+        double[] angleValues = PID(angleKp, angleKd, angleKi, currentAngle(), targetAngle,
                 angleIntegralPrior, angleErrorPrior, iterationTime);
 
         double angleDifference = angleValues[0];
@@ -91,37 +87,17 @@ public class PreciseMovement {
     }
 
     /**
-     * Updates the position of the robot. Uses all 4 motor encoders to do this. Finds the delta of encoder value of the motors and turns this into a vector.
-     * Adds these vectors together to find the change in the robots position. Adds this change to the current position to find the updated current position of the robot.
+     * Updates the position of the robot using deadwheals. Uses all 4 motor 
+     * encoders to do this. Finds the delta of encoder value of the motors and 
+     * turns this into a vector. Adds these vectors together to find the change 
+     * in the robots position. Adds this change to the current position to find 
+     * the updated current position of the robot.
      */
     public static void updatePos() {
-        double flTick = fl.getCurrentPosition() - flPastTick;
-        double frTick = fr.getCurrentPosition() - frPastTick;
-        double blTick = bl.getCurrentPosition() - blPastTick;
-        double brTick = br.getCurrentPosition() - brPastTick;
-
-        MathVector currentVector = finalWheelVector(flTick, frTick, blTick, brTick, -imu.getAngularOrientation().firstAngle);
-        double[] pos = newPosition(xPos, yPos, currentVector);
-        xPos = pos[0];
-        yPos = pos[1];
-
-        // remember past encoder values
-        flPastTick = fl.getCurrentPosition();
-        frPastTick = fr.getCurrentPosition();
-        blPastTick = bl.getCurrentPosition();
-        brPastTick = br.getCurrentPosition();
-    }
-
-
-    /**
-     * Updates the position of the robot using deadwheel encoders
-     * @return returns current position of dead wheels for TESTING purposes. Return can be gotton rid of after.
-     */
-    public static double[] updateDeadWheelPos() {
         double ophTick = oph.getCurrentPosition() - ophPastTick;
         double opvTick = opv.getCurrentPosition() - opvPastTick;
 
-        MathVector currentVector = finalDeadWheelVector(ophTick, opvTick, -imu.getAngularOrientation().firstAngle);
+        MathVector currentVector = finalDeadWheelVector(ophTick, opvTick, currentAngle());
         double[] pos = newPosition(xPos, yPos, currentVector);
         xPos = pos[0];
         yPos = pos[1];
@@ -129,7 +105,6 @@ public class PreciseMovement {
         // remember past encoder values
         ophPastTick = oph.getCurrentPosition();
         opvPastTick = opv.getCurrentPosition();
-        return new double[] {ophTick, opvTick, opv.getCurrentPosition(), oph.getCurrentPosition()};
     }
 
 
@@ -147,7 +122,7 @@ public class PreciseMovement {
         MathVector[] deadWheelVectors = new MathVector[] {ophVector, opvVector};
         // just using a random vector to use the add function in the vector class
         MathVector finalVector = ophVector.add(deadWheelVectors);
-        return new MathVector(finalVector.magnitude, finalVector.angle + robotAngle);
+        return new MathVector(finalVector.magnitude, finalVector.angle);
     }
 
 
@@ -214,7 +189,7 @@ public class PreciseMovement {
 
     /******* PRIVATE FUNCTIONS ********/
     /**
-     * FILL ME OUT
+     * gets encoder deltas from wheels and makes vector representing change in position
      * @param deltaFl change in front left motor encoder
      * @param deltaFr change in front right motor encoder
      * @param deltaBl change in back left motor encoder
@@ -222,7 +197,9 @@ public class PreciseMovement {
      * @param robotAngle current angle of robot
      * @return returns vector representing change in robots position
      */
-    private static MathVector finalWheelVector(double deltaFl, double deltaFr, double deltaBl, double deltaBr, double robotAngle) {
+    private static MathVector finalWheelVector(double deltaFl, double deltaFr, 
+            double deltaBl, double deltaBr, double robotAngle) {
+                
         MathVector flvector = new MathVector(deltaFl, Math.PI*0.25 + robotAngle);
         MathVector frvector = new MathVector(deltaFr, Math.PI*0.75 + robotAngle);
         MathVector blvector = new MathVector(deltaBl, Math.PI*0.75 + robotAngle);
@@ -236,11 +213,11 @@ public class PreciseMovement {
 
 
     /**
-     * FILL ME OUT
-     * @param oldX FILL ME OUT
-     * @param oldY FILL ME OUT
-     * @param finalVector FILL ME OUT
-     * @return FILL ME OUT
+     * adds the vector representing change in position to the current position
+     * @param oldX old x position
+     * @param oldY old y position
+     * @param finalVector vector representing change in position
+     * @return an array with the updated current x position and current y position
      */
     private static double[] newPosition(double oldX, double oldY, MathVector finalVector) {
         return new double[] { oldX + finalVector.x, oldY + finalVector.y };
@@ -248,48 +225,70 @@ public class PreciseMovement {
 
 
     /**
-     * FILL ME OUT
-     * @param currentX FILL ME OUT
-     * @param currentY FILL ME OUT
-     * @param desiredX FILL ME OUT
-     * @param desiredY FILL ME OUT
-     * @param iterationTime FILL ME OUT
-     * @return FILL ME OUT
+     * gets the current position and target postiion, deciding how much power should be distributed to motor for it to move.
+     * @param currentX the current x position of robot
+     * @param currentY the current y position of robot
+     * @param desiredX target x position
+     * @param desiredY target y position
+     * @param iterationTime the time between each time this function is called. Used for PID control
+     * @return an array representing how much power should be distributed vertically and horizontally to robot
      */
     private static double[] desiredVector(double currentX, double currentY, double desiredX, double desiredY, double iterationTime) {
-        double targetDistance = Math.sqrt(sqr(desiredX-currentX) * sqr(desiredY-currentY));
-        double angle = Math.atan2((desiredX-currentX), (desiredY-currentY));
+        double targetDistance = Math.sqrt(sqr(desiredX-currentX) + sqr(desiredY-currentY));
+        double angle = Math.atan2((desiredY-currentY), (desiredX-currentX));
 
         double[] wheelValues = PID(movementKp, movementKd, movementKi, 0, targetDistance,
                 movementIntegralPrior, movementErrorPrior, iterationTime);
 
         movementErrorPrior = wheelValues[1];
         movementIntegralPrior = wheelValues[2];
+        // double wheelValues[] = {targetDistance/1000};
 
         return new double[] { Math.cos(angle) * wheelValues[0], Math.sin(angle) * wheelValues[0] };
+        // return new double[] { 0, .4 };
     }
 
 
     /**
      * converts encoder changes to vectors. Adds imu angle to translate vectors to angle of robot. Adds vectors to find change in robots position.
-     * @param rotX FILL ME OUT
-     * @param rotY FILL ME OUT
-     * @param rx FILL ME OUT
+     * @param rotX movement power along x axis. This is field centric
+     * @param rotY movemnet power along y axis. This is field centric
+     * @param rx turning power. Increasing this makes the robot turn while moving
      */
     private static void robotMove(double rotX, double rotY, double rx) {
-        final double MAX_SPEED = 0.75;
+        final double MAX_SPEED = .7;
 
-        // Read inverse IMU heading, as the IMU heading is CW positive
-        double botHeading = -imu.getAngularOrientation().firstAngle;
+        double botHeading = currentAngle();
 
-        rotX = (rotX * Math.cos(botHeading) - rotY * Math.sin(botHeading)) / 2;
-        rotY = (rotX * Math.sin(botHeading) + rotY * Math.cos(botHeading)) / 2;
+        // rotX = (rotX * Math.cos(botHeading) - rotY * Math.sin(botHeading)) / 2;
+        // rotY = (rotX * Math.sin(botHeading) + rotY * Math.cos(botHeading)) / 2;
 
-        double denominator = Math.max(Math.abs(rotY) + Math.abs(rotX) + (rx), 1);
-        double frontLeftPower = (rotY + rotX - rx) / denominator;
-        double backLeftPower = (rotY - rotX - rx) / denominator;
-        double frontRightPower = (rotY - rotX + rx) / denominator;
-        double backRightPower = (rotY + rotX  + rx) / denominator;
+        // double denominator = Math.max(Math.abs(rotY) + Math.abs(rotX) + (rx), 1);
+        // double frontLeftPower = (rotY + rotX - rx) / denominator;
+        // double frontRightPower = (rotY - rotX + rx) / denominator;
+        // double backLeftPower = (rotY - rotX - rx) / denominator;
+        // double backRightPower = (rotY + rotX  + rx) / denominator;
+
+        // fl.setPower(frontLeftPower * MAX_SPEED);
+        // bl.setPower(backLeftPower * MAX_SPEED);
+        // fr.setPower(frontRightPower * MAX_SPEED);
+        // br.setPower(backRightPower * MAX_SPEED);
+
+        rotX *= -1;
+        double x = rotX * 1.1; // Counteract imperfect strafing. fix: magic number
+        double y = rotY * .9; // Remember, this is reversed! fix: magic number
+        double theta = Math.atan2(y, x);
+        double power = Math.hypot(x, y);
+
+        theta += botHeading;
+        double sin = Math.sin(theta - Math.PI/4);
+        double cos = Math.cos(theta - Math.PI/4);
+        double max = Math.max(Math.abs(sin), Math.abs(cos));
+
+        double frontLeftPower = power * cos / max + rx;
+        double frontRightPower = power * sin / max - rx;
+        double backLeftPower = power * sin / max + rx;
+        double backRightPower = power * cos / max - rx;
 
         fl.setPower(frontLeftPower * MAX_SPEED);
         bl.setPower(backLeftPower * MAX_SPEED);
@@ -299,7 +298,7 @@ public class PreciseMovement {
 
 
     /**
-     * FILL ME OUT
+     * Used to control the curve of how much a value should change as it approachs a target.
      * @param kp causes actualValue to move to desiredValue in a more proportional matter based on the error(or difference between them)
      * @param kd causes actual value to decrease if it is moving to quickly toward desiredValue
      * @param ki causes actual value to increase if it is moving to slowly toward desiredValue
@@ -310,8 +309,9 @@ public class PreciseMovement {
      * @param iterationTime the time between each time this function is called. Timer will need to be used
      * @return the amount actualValue should change by to reach the desiredValue
      */
-    private static double[] PID(double kp, double kd, double ki, double actualValue, double desiredValue,
-                                double integralPrior, double errorPrior, double iterationTime) {
+    private static double[] PID(double kp, double kd, double ki, 
+            double actualValue, double desiredValue, double integralPrior, 
+            double errorPrior, double iterationTime) {
 
         double error = desiredValue - actualValue;
         double integral = integralPrior + error * iterationTime;
